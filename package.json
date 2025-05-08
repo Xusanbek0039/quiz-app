@@ -2,14 +2,11 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://xusanbek0039.github.io/quiz-app/ ",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "deploy": "npm run build && npm run export && gh-pages -d out"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -70,7 +67,6 @@
     "@types/react-dom": "^19",
     "gh-pages": "^6.3.0",
     "postcss": "^8",
-    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
