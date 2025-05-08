@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeTestX - Bosh sahifa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="animate-title">Frontend Quiz Platform</h1>
+            <p class="animate-subtitle">Bilimingizni sinab ko'ring va natijalarni kuzating</p>
+            <button id="startQuizBtn" class="btn btn-primary btn-large animate-button">
+                Testni Boshlash
+                <span class="btn-icon">→</span>
+            </button>
+        </div>
+
+        <div class="section-title">
+            <h2>Testlar</h2>
+        </div>
+        
+        <div class="tests-grid" id="testsGrid">
+            <!-- Tests will be loaded here -->
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div class="section-title">
+            <h2>Statistika</h2>
+        </div>
+        
+        <div class="statistics" id="statisticsContainer">
+            <!-- Statistics will be loaded here -->
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+            }
+
+            // Load navbar
+            loadNavbar();
+            
+            // Initialize theme
+            initTheme();
+            
+            // Load tests
+            loadTests();
+            
+            // Load statistics
+            loadStatistics();
+            
+            // Start Quiz button event
+            document.getElementById('startQuizBtn').addEventListener('click', function() {
+                // Get the first test ID and redirect to it
+                const tests = JSON.parse(localStorage.getItem('tests')) || [];
+                if (tests.length > 0) {
+                    window.location.href = `quiz.html?id=${tests[0].id}`;
+                } else {
+                    alert('Hech qanday test topilmadi!');
+                }
+            });
+        });
+
+        function loadTests() {
+            const testsGrid = document.getElementById('testsGrid');
+            
+            // Get tests from localStorage
+            const tests = JSON.parse(localStorage.getItem('tests')) || [];
+            
+            if (tests.length === 0) {
+                // If no tests, load default tests
+                fetch('data/testlar.json')
+                    .then(response => {
+                        // If fetch fails (file doesn't exist), create default test
+                        if (!response.ok) {
+                            const defaultTests = [
+                                {
+                                    "id": "html-test",
+                                    "title": "HTML asoslari",
+                                    "description": "HTML bo'yicha boshlang'ich savollar",
+                                    "time": 5,
+                                    "questions": [
+                                        {
+                                            "id": "q1",
+                                            "text": "HTML nima?",
+                                            "answers": [
+                                                { "id": "a1", "text": "Dasturlash tili", "isCorrect": false },
+                                                { "id": "a2", "text": "Belgilar tilidir", "isCorrect": true }
+                                            ]
+                                        },
+                                        {
+                                            "id": "q2",
+                                            "text": "HTML fayl kengaytmasi qanday?",
+                                            "answers": [
+                                                { "id": "a1", "text": ".html", "isCorrect": true },
+                                                { "id": "a2", "text": ".css", "isCorrect": false },
+                                                { "id": "a3", "text": ".js", "isCorrect": false }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "css-test",
+                                    "title": "CSS asoslari",
+                                    "description": "CSS bo'yicha boshlang'ich savollar",
+                                    "time": 5,
+                                    "questions": [
+                                        {
+                                            "id": "q1",
+                                            "text": "CSS nima?",
+                                            "answers": [
+                                                { "id": "a1", "text": "Dasturlash tili", "isCorrect": false },
+                                                { "id": "a2", "text": "Stillar tilidir", "isCorrect": true }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ];
+                            localStorage.setItem('tests', JSON.stringify(defaultTests));
+                            displayTests(defaultTests);
+                            return;
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data) {
+                            localStorage.setItem('tests', JSON.stringify(data));
+                            displayTests(data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading tests:', error);
+                        const defaultTests = [
+                            {
+                                "id": "html-test",
+                                "title": "HTML asoslari",
+                                "description": "HTML bo'yicha boshlang'ich savollar",
+                                "time": 5,
+                                "questions": [
+                                    {
+                                        "id": "q1",
+                                        "text": "HTML nima?",
+                                        "answers": [
+                                            { "id": "a1", "text": "Dasturlash tili", "isCorrect": false },
+                                            { "id": "a2", "text": "Belgilar tilidir", "isCorrect": true }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ];
+                        localStorage.setItem('tests', JSON.stringify(defaultTests));
+                        displayTests(defaultTests);
+                    });
+            } else {
+                displayTests(tests);
+            }
+        }
+
+        function displayTests(tests) {
+            const testsGrid = document.getElementById('testsGrid');
+            testsGrid.innerHTML = '';
+            
+            tests.forEach(test => {
+                const testCard = document.createElement('div');
+                testCard.className = 'test-card';
+                testCard.innerHTML = `
+                    <h3>${test.title}</h3>
+                    <p>${test.description}</p>
+                    <div class="test-info">
+                        <span>${test.questions.length} savollar</span>
+                        <span>${test.time} daqiqa</span>
+                    </div>
+                    <a href="quiz.html?id=${test.id}" class="btn btn-secondary">Testni boshlash</a>
+                `;
+                testsGrid.appendChild(testCard);
+            });
+        }
+
+        function loadStatistics() {
+            const statisticsContainer = document.getElementById('statisticsContainer');
+            const currentUser = localStorage.getItem('currentUser');
+            
+            // Get results from localStorage
+            const results = JSON.parse(localStorage.getItem('results')) || [];
+            const userResults = results.filter(result => result.fullname === currentUser && result.testId);
+            
+            if (userResults.length === 0) {
+                statisticsContainer.innerHTML = '<p class="no-data">Hali hech qanday test natijasi yo\'q</p>';
+                return;
+            }
+            
+            statisticsContainer.innerHTML = '';
+            
+            // Get tests for test names
+            const tests = JSON.parse(localStorage.getItem('tests')) || [];
+            
+            // Sort results by date (newest first)
+            userResults.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            userResults.forEach(result => {
+                const test = tests.find(t => t.id === result.testId) || { title: result.testId };
+                
+                const resultCard = document.createElement('div');
+                resultCard.className = 'result-card';
+                resultCard.innerHTML = `
+                    <div class="result-info">
+                        <div class="result-user">${result.fullname}</div>
+                        <div class="result-test">${test.title}</div>
+                        <div class="result-date">${result.date}</div>
+                    </div>
+                    <div class="result-score">
+                        <div class="score-value">${result.score}/${result.total}</div>
+                        <div class="score-percent">${result.percent}%</div>
+                    </div>
+                `;
+                statisticsContainer.appendChild(resultCard);
+            });
+        }
+    </script>
+</body>
+</html>

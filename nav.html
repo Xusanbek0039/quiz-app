@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="index.html">CodeTestX</a>
+        </div>
+        
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="index.html" class="navbar-item">Bosh sahifa</a>
+            <a href="index.html#tests" class="navbar-item">Testlar</a>
+            <a href="index.html#statistics" class="navbar-item">Statistika</a>
+            <a href="admin.html" class="navbar-item">Admin</a>
+        </div>
+        
+        <div class="navbar-end">
+            <div class="navbar-item datetime" id="currentDateTime">
+                00:00:00
+            </div>
+            
+            <div class="navbar-item theme-toggle">
+                <span class="light-icon">☀️</span>
+                <label class="switch">
+                    <input type="checkbox" id="navThemeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="dark-icon">🌙</span>
+            </div>
+            
+            <div class="navbar-item social-links">
+                <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+                <a href="https://github.com" target="_blank" class="social-link">GitHub</a>
+            </div>
+            
+            <div class="navbar-item user-profile" id="userProfile">
+                <span class="user-name">User</span>
+                <div class="profile-dropdown">
+                    <a href="#" id="logoutBtn">Chiqish</a>
+                </div>
+            </div>
+            
+            <button class="navbar-burger" id="navbarBurger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "fullname": "Hasan Abdullayev",
+    "testId": "html-test",
+    "score": 5,
+    "total": 7,
+    "percent": 71,
+    "device": "Windows 11 Chrome",
+    "date": "2025-05-08 14:22"
+  },
+  {
+    "fullname": "Hasan Abdullayev",
+    "testId": "css-test",
+    "score": 4,
+    "total": 5,
+    "percent": 80,
+    "device": "Windows 11 Chrome",
+    "date": "2025-05-08 15:10"
+  },
+  {
+    "fullname": "Aziza Karimova",
+    "testId": "html-test",
+    "score": 6,
+    "total": 7,
+    "percent": 86,
+    "device": "MacOS Safari",
+    "date": "2025-05-07 10:15"
+  },
+  {
+    "fullname": "Aziza Karimova",
+    "testId": "js-test",
+    "score": 3,
+    "total": 5,
+    "percent": 60,
+    "device": "MacOS Safari",
+    "date": "2025-05-07 11:30"
+  }
+]

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeTestX - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="admin-header">
+            <h1>Admin Panel</h1>
+        </div>
+        
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="tests">Testlar</button>
+            <button class="tab-btn" data-tab="add-test">Yangi Test</button>
+            <button class="tab-btn" data-tab="results">Natijalar</button>
+        </div>
+        
+        <div class="admin-content">
+            <!-- Tests Tab -->
+            <div id="tests-tab" class="tab-content active">
+                <div class="admin-section-header">
+                    <h2>Testlar Ro'yxati</h2>
+                </div>
+                
+                <div id="adminTestsList" class="admin-list">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+            
+            <!-- Add Test Tab -->
+            <div id="add-test-tab" class="tab-content">
+                <div class="admin-section-header">
+                    <h2>Yangi Test Qo'shish</h2>
+                </div>
+                
+                <form id="addTestForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="testId">Test ID</label>
+                        <input type="text" id="testId" name="testId" required placeholder="Masalan: html-test">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testTitle">Test Nomi</label>
+                        <input type="text" id="testTitle" name="testTitle" required placeholder="Masalan: HTML asoslari">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testDescription">Test Tavsifi</label>
+                        <input type="text" id="testDescription" name="testDescription" required placeholder="Masalan: HTML bo'yicha boshlang'ich savollar">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testTime">Test Vaqti (daqiqada)</label>
+                        <input type="number" id="testTime" name="testTime" required min="1" value="5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testQuestions">Savollar (JSON formatda)</label>
+                        <textarea id="testQuestions" name="testQuestions" rows="10" required placeholder='[
+  {
+    "id": "q1",
+    "text": "HTML nima?",
+    "answers": [
+      { "id": "a1", "text": "Dasturlash tili", "isCorrect": false },
+      { "id": "a2", "text": "Belgilar tilidir", "isCorrect": true }
+    ]
+  }
+]'></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Testni Qo'shish</button>
+                </form>
+            </div>
+            
+            <!-- Results Tab -->
+            <div id="results-tab" class="tab-content">
+                <div class="admin-section-header">
+                    <h2>Foydalanuvchilar Natijalari</h2>
+                </div>
+                
+                <div id="adminResultsList" class="admin-list">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load navbar
+            loadNavbar();
+            
+            // Initialize theme
+            initTheme();
+            
+            // Set up tabs
+            setupTabs();
+            
+            // Load tests
+            loadAdminTests();
+            
+            // Load results
+            loadAdminResults();
+            
+            // Set up add test form
+            setupAddTestForm();
+        });
+
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show active tab
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-tab`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        function loadAdminTests() {
+            const adminTestsList = document.getElementById('adminTestsList');
+            
+            // Get tests from localStorage
+            const tests = JSON.parse(localStorage.getItem('tests')) || [];
+            
+            if (tests.length === 0) {
+                adminTestsList.innerHTML = '<p class="no-data">Hali hech qanday test yo\'q</p>';
+                return;
+            }
+            
+            adminTestsList.innerHTML = '';
+            
+            tests.forEach(test => {
+                const testItem = document.createElement('div');
+                testItem.className = 'admin-list-item';
+                testItem.innerHTML = `
+                    <div class="admin-item-info">
+                        <h3>${test.title}</h3>
+                        <p>${test.description}</p>
+                        <div class="admin-item-details">
+                            <span>ID: ${test.id}</span>
+                            <span>${test.questions.length} savollar</span>
+                            <span>${test.time} daqiqa</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="btn btn-secondary btn-small edit-test" data-id="${test.id}">Tahrirlash</button>
+                        <button class="btn btn-danger btn-small delete-test" data-id="${test.id}">O'chirish</button>
+                    </div>
+                `;
+                adminTestsList.appendChild(testItem);
+            });
+            
+            // Add event listeners for edit and delete buttons
+            document.querySelectorAll('.edit-test').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const testId = this.getAttribute('data-id');
+                    editTest(testId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-test').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const testId = this.getAttribute('data-id');
+                    deleteTest(testId);
+                });
+            });
+        }
+
+        function loadAdminResults() {
+            const adminResultsList = document.getElementById('adminResultsList');
+            
+            // Get results from localStorage
+            const results = JSON.parse(localStorage.getItem('results')) || [];
+            const resultsWithTest = results.filter(result => result.testId);
+            
+            if (resultsWithTest.length === 0) {
+                adminResultsList.innerHTML = '<p class="no-data">Hali hech qanday natija yo\'q</p>';
+                return;
+            }
+            
+            adminResultsList.innerHTML = '';
+            
+            // Get tests for test names
+            const tests = JSON.parse(localStorage.getItem('tests')) || [];
+            
+            // Sort results by date (newest first)
+            resultsWithTest.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            resultsWithTest.forEach(result => {
+                const test = tests.find(t => t.id === result.testId) || { title: result.testId };
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = 'admin-list-item';
+                resultItem.innerHTML = `
+                    <div class="admin-item-info">
+                        <h3>${result.fullname}</h3>
+                        <p>${test.title}</p>
+                        <div class="admin-item-details">
+                            <span>Sana: ${result.date}</span>
+                            <span>Ball: ${result.score}/${result.total} (${result.percent}%)</span>
+                            <span>Qurilma: ${result.device || 'Noma\'lum'}</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="btn btn-danger btn-small delete-result" data-index="${results.indexOf(result)}">O'chirish</button>
+                    </div>
+                `;
+                adminResultsList.appendChild(resultItem);
+            });
+            
+            // Add event listeners for delete buttons
+            document.querySelectorAll('.delete-result').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const resultIndex = parseInt(this.getAttribute('data-index'));
+                    deleteResult(resultIndex);
+                });
+            });
+        }
+
+        function setupAddTestForm() {
+            const addTestForm = document.getElementById('addTestForm');
+            
+            addTestForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                try {
+                    const testId = document.getElementById('testId').value.trim();
+                    const testTitle = document.getElementById('testTitle').value.trim();
+                    const testDescription = document.getElementById('testDescription').value.trim();
+                    const testTime = parseInt(document.getElementById('testTime').value);
+                    const testQuestionsJson = document.getElementById('testQuestions').value.trim();
+                    
+                    // Validate JSON
+                    const testQuestions = JSON.parse(testQuestionsJson);
+                    
+                    if (!Array.isArray(testQuestions)) {
+                        throw new Error('Savollar massiv bo\'lishi kerak');
+                    }
+                    
+                    // Create test object
+                    const newTest = {
+                        id: testId,
+                        title: testTitle,
+                        description: testDescription,
+                        time: testTime,
+                        questions: testQuestions
+                    };
+                    
+                    // Get existing tests
+                    let tests = JSON.parse(localStorage.getItem('tests')) || [];
+                    
+                    // Check if test ID already exists
+                    const existingTestIndex = tests.findIndex(test => test.id === testId);
+                    if (existingTestIndex !== -1) {
+                        if (confirm('Bu ID bilan test allaqachon mavjud. Uni yangilashni istaysizmi?')) {
+                            tests[existingTestIndex] = newTest;
+                        } else {
+                            return;
+                        }
+                    } else {
+                        tests.push(newTest);
+                    }
+                    
+                    // Save tests
+                    localStorage.setItem('tests', JSON.stringify(tests));
+                    
+                    // Reset form
+                    addTestForm.reset();
+                    
+                    // Show success message
+                    alert('Test muvaffaqiyatli qo\'shildi!');
+                    
+                    // Reload tests
+                    loadAdminTests();
+                    
+                    // Switch to tests tab
+                    document.querySelector('.tab-btn[data-tab="tests"]').click();
+                } catch (error) {
+                    alert(`Xatolik: ${error.message}`);
+                }
+            });
+        }
+
+        function editTest(testId) {
+            // Get tests from localStorage
+            const tests = JSON.parse(localStorage.getItem('tests')) || [];
+            const test = tests.find(t => t.id === testId);
+            
+            if (!test) {
+                alert('Test topilmadi!');
+                return;
+            }
+            
+            // Fill form
+            document.getElementById('testId').value = test.id;
+            document.getElementById('testTitle').value = test.title;
+            document.getElementById('testDescription').value = test.description;
+            document.getElementById('testTime').value = test.time;
+            document.getElementById('testQuestions').value = JSON.stringify(test.questions, null, 2);
+            
+            // Switch to add test tab
+            document.querySelector('.tab-btn[data-tab="add-test"]').click();
+        }
+
+        function deleteTest(testId) {
+            if (!confirm('Haqiqatan ham bu testni o\'chirishni istaysizmi?')) {
+                return;
+            }
+            
+            // Get tests from localStorage
+            let tests = JSON.parse(localStorage.getItem('tests')) || [];
+            
+            // Remove test
+            tests = tests.filter(test => test.id !== testId);
+            
+            // Save tests
+            localStorage.setItem('tests', JSON.stringify(tests));
+            
+            // Reload tests
+            loadAdminTests();
+        }
+
+        function deleteResult(resultIndex) {
+            if (!confirm('Haqiqatan ham bu natijani o\'chirishni istaysizmi?')) {
+                return;
+            }
+            
+            // Get results from localStorage
+            let results = JSON.parse(localStorage.getItem('results')) || [];
+            
+            // Remove result
+            results.splice(resultIndex, 1);
+            
+            // Save results
+            localStorage.setItem('results', JSON.stringify(results));
+            
+            // Reload results
+            loadAdminResults();
+        }
+    </script>
+</body>
+</html>
