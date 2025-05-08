@@ -1,4 +1,5 @@
-// Client-side sahifa
+// app/quiz/[testId]/page.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -8,43 +9,40 @@ import { QuizComponent } from "@/components/quiz-component"
 import { Loader2 } from "lucide-react"
 import { type Test, getTestById } from "@/lib/test-utils"
 
-type TestPageProps = {
-  params: {
-    testId: string
-  }
-}
-
-export default function TestPage({ params }: TestPageProps) {
+// Client Component ekanligini belgilash
+export default function TestPage({ params }: { params: Promise<{ testId: string }> }) {
   const router = useRouter()
   const [user, setUser] = useState<{ firstName: string; lastName: string } | null>(null)
   const [test, setTest] = useState<Test | null>(null)
   const [loading, setLoading] = useState(true)
 
+  // params Promise bo'lgani uchun await qilish kerak
   useEffect(() => {
-    const userInfo = sessionStorage.getItem("quizUser")
+    const loadTest = async () => {
+      const { testId } = await params
 
-    if (!userInfo) {
-      router.push("/")
-      return
-    }
+      const userInfo = sessionStorage.getItem("quizUser")
 
-    setUser(JSON.parse(userInfo))
+      if (!userInfo) {
+        router.push("/")
+        return
+      }
 
-    const testData = getTestById(params.testId, "testlar")
+      setUser(JSON.parse(userInfo))
 
-    if (!testData) {
-      router.push("/quiz")
-      return
-    }
+      const testData = getTestById(testId, "testlar")
 
-    setTest(testData)
+      if (!testData) {
+        router.push("/quiz")
+        return
+      }
 
-    const timer = setTimeout(() => {
+      setTest(testData)
       setLoading(false)
-    }, 1000)
+    }
 
-    return () => clearTimeout(timer)
-  }, [params.testId, router])
+    loadTest()
+  }, [params, router])
 
   if (loading) {
     return (
@@ -83,4 +81,4 @@ export default function TestPage({ params }: TestPageProps) {
       </div>
     </main>
   )
-}
+} 
