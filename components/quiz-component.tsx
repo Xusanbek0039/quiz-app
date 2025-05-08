@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -24,14 +23,12 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
   const [showFeedback, setShowFeedback] = useState(false)
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(test.time * 60) // Convert minutes to seconds
-
   const currentQuestion = test.questions[currentQuestionIndex]
   const progress = ((currentQuestionIndex + 1) / test.questions.length) * 100
 
   // Timer effect
   useEffect(() => {
     if (quizCompleted || timeLeft <= 0) return
-
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -41,7 +38,7 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
         }
         return prev - 1
       })
-    }, 1000)
+    }, [timeLeft, quizCompleted])
 
     return () => clearInterval(timer)
   }, [timeLeft, quizCompleted])
@@ -62,7 +59,6 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
 
     // Find the selected answer
     const selectedAnswerObj = currentQuestion.answers.find((a) => a.id === selectedAnswer)
-
     if (!selectedAnswerObj) return
 
     // Record answer
@@ -82,7 +78,6 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
     // Move to next question after delay
     setTimeout(() => {
       setShowFeedback(false)
-
       if (currentQuestionIndex < test.questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
         setSelectedAnswer(null)
@@ -97,10 +92,10 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
     const correctAnswers = answers.filter((a) => a.isCorrect).length
 
     // Create result object
-    const result: TestResult = {
+    const result = {
       id: generateId(),
       testId: test.id,
-      userId: user?.firstName + user?.lastName || "anonymous",
+      userId: (user?.firstName || "") + (user?.lastName || "") || "anonymous",
       userName: user?.firstName || "Anonymous",
       userLastName: user?.lastName || "User",
       score: correctAnswers,
@@ -137,7 +132,6 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
               <div className="h-full bg-gradient-to-r from-pink-400 to-purple-400 rounded-full" />
             </Progress>
           </div>
-
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestionIndex}
@@ -180,7 +174,6 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
                           >
                             {answer.text}
                           </Label>
-
                           {showFeedback && selectedAnswer === answer.id && (
                             <div className="absolute right-4 top-1/2 -translate-y-1/2">
                               {answer.isCorrect ? (
@@ -222,7 +215,7 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
           </CardHeader>
           <CardContent className="text-center">
             <p className="text-slate-600 dark:text-slate-300 mb-4">
-            Viktorinani yakunladingiz. Natijalaringizni ko'rish uchun pastga bosing.
+              Viktorinani yakunladingiz. Natijalaringizni ko'rish uchun pastga bosing.
             </p>
             <div className="flex justify-center">
               <Button
