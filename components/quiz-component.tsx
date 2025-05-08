@@ -126,7 +126,7 @@ export function QuizComponent({ test, user }: QuizComponentProps) {
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-slate-600 dark:text-slate-300">
-                {currentQuestionIndex + 1} savoldan {test.questions.length} dasiz
+                {currentQuestionIndex + 1}-savol. Umumiy: {test.questions.length} ta savol mavjud.
               </span>
               <div className="flex items-center">
                 <Clock className="h-4 w-4 mr-1 text-pink-500 dark:text-pink-400" />
