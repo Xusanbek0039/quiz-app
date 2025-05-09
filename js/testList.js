@@ -5,9 +5,10 @@
 
 // Constants
 const TEST_FILE_PATH = [
-  '/testlar/python-1.json',
-  '/testlar/python-2.json'
+  'https://xusanbek0039.github.io/quiz-app/testlar/python-1.json',
+  'https://xusanbek0039.github.io/quiz-app/testlar/python-2.json'
 ];
+
 const TEST_LIST_ELEMENT_ID = 'testsList';
 
 // Initialize test list
