@@ -1,45 +1,55 @@
 /**
- * Test Engine module for IT Ijodkorlari
- * Handles test loading, display, interaction, and results
+ * IT Ijodkorlari uchun Test Tizimi
+ * Bu modul test yuklash, savolni ko'rsatish, javoblarni qabul qilish,
+ * natija hisoblash hamda statistikaga saqlash vazifalarini bajaradi.
  */
 
-// Test data and state
-let currentTest = null;
-let userAnswers = {};
-let currentQuestionIndex = 0;
+// Hozirgi test ma'lumotlari, foydalanuvchi javoblari va joriy savol indeksini saqlaydi
+let currentTest = null;         // Joriy testning to'liq ma'lumoti
+let userAnswers = {};           // Foydalanuvchi javoblari { questionId: answerId }
+let currentQuestionIndex = 0;   // Joriy savol raqami
 
-// Initialize test
+/**
+ * Testni ishga tushirish funksiyasi
+ * URL-dan test ID ni olib, testni yuklaydi
+ */
 async function initTest() {
-  const testIdParam = new URLSearchParams(window.location.search).get('id');
-  
+  const urlParams = new URLSearchParams(window.location.search);
+  const testIdParam = urlParams.get('id'); // Masalan: ?id=python-basics
+
   if (!testIdParam) {
-    redirectToHome();
+    redirectToHome(); // Agar test ID yo'q bo'lsa, bosh sahifaga o'tkazadi
     return;
   }
-  
-  await loadTest(testIdParam);
-  setupTestInteractions();
+
+  await loadTest(testIdParam); // Test ma'lumotlarini yuklaydi
+  setupTestInteractions();     // Tugmalar bilan aloqani sozlaydi
 }
 
-// Load test data
+/**
+ * Test ma'lumotlarini yuklaydi
+ * @param {string} testId - Yuklanadigan test identifikatori
+ */
 async function loadTest(testId) {
   try {
-    // In a real app, this would load from the file system
-    currentTest = await loadSampleTest();
-    
+    // Haqiqiy ilovada bu serverdan yuklanadi
+    currentTest = await loadSampleTest(); // Namuna testni yuklaydi
+
     if (!currentTest) {
       showErrorMessage("Test topilmadi");
       return;
     }
-    
-    displayTestInfo();
+
+    displayTestInfo(); // Test sarlavhasi, tavsifi, vaqt va savollar sonini ko'rsatadi
   } catch (error) {
-    console.error('Error loading test:', error);
+    console.error("Test yuklashda xato:", error);
     showErrorMessage("Testni yuklashda xatolik yuz berdi");
   }
 }
 
-// Display test information
+/**
+ * Test sarlavhasi, tavsifi vaqt kabi ma'lumotlarni HTML-ga chiqaradi
+ */
 function displayTestInfo() {
   document.getElementById('testTitle').textContent = currentTest.title;
   document.getElementById('testDescription').textContent = currentTest.description;
@@ -48,60 +58,60 @@ function displayTestInfo() {
   document.getElementById('totalQuestions').textContent = currentTest.questions.length;
 }
 
-// Setup test interactions
+/**
+ * Test bilan o'zaro ta'sir tugmalari (boshlash, keyingi, oldingi, yakunlash)
+ */
 function setupTestInteractions() {
-  // Start test button
   const startButton = document.getElementById('startTestBtn');
   if (startButton) {
-    startButton.addEventListener('click', startTest);
+    startButton.addEventListener('click', startTest); // Testni boshlash tugmasi
   }
-  
-  // Navigation buttons
+
   const prevButton = document.getElementById('prevQuestionBtn');
   const nextButton = document.getElementById('nextQuestionBtn');
   const finishButton = document.getElementById('finishTestBtn');
-  
+
   if (prevButton) prevButton.addEventListener('click', goToPreviousQuestion);
   if (nextButton) nextButton.addEventListener('click', goToNextQuestion);
   if (finishButton) finishButton.addEventListener('click', finishTest);
 }
 
-// Start the test
+/**
+ * Testni boshlaydi:
+ * Kirish ekranini yashiradi, savollarni ko'rsatishni boshlaydi
+ */
 function startTest() {
-  // Hide intro, show test content
   document.getElementById('testIntro').classList.add('hidden');
   document.getElementById('testContent').classList.remove('hidden');
-  
-  // Initialize user answers
-  initializeUserAnswers();
-  
-  // Display first question
-  displayQuestion(0);
-  
-  // Start timer if needed
-  // startTimer(currentTest.time);
+
+  initializeUserAnswers(); // Barcha savollar uchun "javob berilmagan" holatini sozlaydi
+  displayQuestion(0);        // Birinchi savolni ekranga chiqaradi
 }
 
-// Initialize user answers array
+/**
+ * Har bir savol uchun javob joyini tayyorlaydi
+ */
 function initializeUserAnswers() {
   currentTest.questions.forEach(question => {
-    userAnswers[question.id] = null; // No answer selected initially
+    userAnswers[question.id] = null; // Dastlab hech qanday javob tanlanmagan
   });
 }
 
-// Display the current question
+/**
+ * Berilgan savolni ekranga chiqaradi
+ * @param {number} index - Savol tartib raqami
+ */
 function displayQuestion(index) {
   if (!currentTest || !currentTest.questions[index]) return;
-  
+
   currentQuestionIndex = index;
   const question = currentTest.questions[index];
-  const questionContainer = document.getElementById('questionContainer');
-  
-  // Update progress
+
+  // Progress bar yangilanadi
   document.getElementById('currentQuestion').textContent = index + 1;
   document.getElementById('progressFill').style.width = `${((index + 1) / currentTest.questions.length) * 100}%`;
-  
-  // Create question HTML
+
+  // HTML hosil qilish
   const questionHTML = `
     <div class="question">
       <h3 class="question-text">${index + 1}. ${question.text}</h3>
@@ -114,32 +124,28 @@ function displayQuestion(index) {
       </div>
     </div>
   `;
-  
-  // Update container with animation
-  questionContainer.style.opacity = '0';
-  questionContainer.style.transform = 'translateY(10px)';
-  
-  setTimeout(() => {
-    questionContainer.innerHTML = questionHTML;
-    questionContainer.style.opacity = '1';
-    questionContainer.style.transform = 'translateY(0)';
-    
-    // Add click event listeners to answers
-    const answerElements = questionContainer.querySelectorAll('.answer-item');
-    answerElements.forEach(element => {
-      element.addEventListener('click', () => selectAnswer(question.id, element.dataset.answerId));
-    });
-  }, 200);
-  
-  // Update navigation buttons
-  updateNavigationButtons();
+
+  const questionContainer = document.getElementById('questionContainer');
+  questionContainer.innerHTML = questionHTML;
+
+  // Javob tanlash hodisasi
+  const answerElements = questionContainer.querySelectorAll('.answer-item');
+  answerElements.forEach(element => {
+    element.addEventListener('click', () => selectAnswer(question.id, element.dataset.answerId));
+  });
+
+  updateNavigationButtons(); // Oldingi/Keyingi tugmalar holatini yangilaydi
 }
 
-// Select an answer
+/**
+ * Foydalanuvchi javobini saqlaydi
+ * @param {string} questionId - Savol ID si
+ * @param {string} answerId - Tanlangan javob ID si
+ */
 function selectAnswer(questionId, answerId) {
   userAnswers[questionId] = answerId;
-  
-  // Update UI to show selected answer
+
+  // UI yangilash: tanlangan javobga stil berish
   const answerElements = document.querySelectorAll('.answer-item');
   answerElements.forEach(element => {
     if (element.dataset.answerId === answerId) {
@@ -148,38 +154,42 @@ function selectAnswer(questionId, answerId) {
       element.classList.remove('selected');
     }
   });
-  
-  // Enable next button if it's disabled
+
+  // Keyingi savol tugmasini faollashtirish
   const nextButton = document.getElementById('nextQuestionBtn');
   if (nextButton.disabled) {
     nextButton.disabled = false;
   }
 }
 
-// Go to previous question
+/**
+ * Oldingi savolga o'tish
+ */
 function goToPreviousQuestion() {
   if (currentQuestionIndex > 0) {
     displayQuestion(currentQuestionIndex - 1);
   }
 }
 
-// Go to next question
+/**
+ * Keyingi savolga o'tish
+ */
 function goToNextQuestion() {
   if (currentQuestionIndex < currentTest.questions.length - 1) {
     displayQuestion(currentQuestionIndex + 1);
   }
 }
 
-// Update navigation buttons state
+/**
+ * Navigatsiya tugmalari (oldingi, keyingi, yakunlash) holatini yangilaydi
+ */
 function updateNavigationButtons() {
   const prevButton = document.getElementById('prevQuestionBtn');
   const nextButton = document.getElementById('nextQuestionBtn');
   const finishButton = document.getElementById('finishTestBtn');
-  
-  // Disable prev button if on first question
+
   prevButton.disabled = currentQuestionIndex === 0;
-  
-  // Show finish button instead of next on last question
+
   if (currentQuestionIndex === currentTest.questions.length - 1) {
     nextButton.classList.add('hidden');
     finishButton.classList.remove('hidden');
@@ -189,34 +199,30 @@ function updateNavigationButtons() {
   }
 }
 
-// Finish the test and show results
+/**
+ * Testni yakunlab, natijani hisoblaydi
+ */
 function finishTest() {
-  // Calculate results
   const results = calculateResults();
-  
-  // Save results to statistics
-  saveTestResults(results);
-  
-  // Display results
-  displayResults(results);
+  saveTestResults(results); // Natijani localStorage ga saqlaydi
+  displayResults(results);  // Natijani ekranga chiqaradi
 }
 
-// Calculate test results
+/**
+ * To'g'ri va noto'g'ri javoblarni hisoblaydi
+ * @returns {Object} - Hisoblangan natija obyekti
+ */
 function calculateResults() {
-  const totalQuestions = currentTest.questions.length;
   let correctAnswers = 0;
   const questionDetails = [];
-  
-  // Check each answer
+
   currentTest.questions.forEach(question => {
     const userAnswer = userAnswers[question.id];
     const correctAnswer = question.answers.find(a => a.isCorrect).id;
     const isCorrect = userAnswer === correctAnswer;
-    
-    if (isCorrect) {
-      correctAnswers++;
-    }
-    
+
+    if (isCorrect) correctAnswers++;
+
     questionDetails.push({
       question: question.text,
       userAnswer: userAnswer ? question.answers.find(a => a.id === userAnswer).text : 'Belgilanmagan',
@@ -224,12 +230,11 @@ function calculateResults() {
       isCorrect
     });
   });
-  
-  // Calculate percentage
-  const percentageCorrect = Math.round((correctAnswers / totalQuestions) * 100);
-  
+
+  const percentageCorrect = Math.round((correctAnswers / currentTest.questions.length) * 100);
+
   return {
-    totalQuestions,
+    totalQuestions: currentTest.questions.length,
     correctAnswers,
     percentageCorrect,
     questionDetails,
@@ -239,55 +244,50 @@ function calculateResults() {
   };
 }
 
-// Save test results to local storage
+/**
+ * Test natijasini localStorage ga saqlaydi
+ * @param {Object} results - Hisoblangan natija
+ */
 function saveTestResults(results) {
-  // Get existing results or initialize empty array
   const storedResults = JSON.parse(localStorage.getItem('testResults') || '[]');
-  
-  // Add new result
   storedResults.push(results);
-  
-  // Save back to local storage
   localStorage.setItem('testResults', JSON.stringify(storedResults));
 }
 
-// Display test results
+/**
+ * Test natijasini ekranga chiqaradi
+ * @param {Object} results - Hisoblangan natija
+ */
 function displayResults(results) {
   const testContentElement = document.getElementById('testContent');
   const testResultsElement = document.getElementById('testResults');
-  
-  // Hide test content
+
   testContentElement.classList.add('hidden');
-  
-  // Build results HTML
+  testResultsElement.classList.remove('hidden');
+
   const resultsHTML = `
     <div class="results-header">
       <h3>Test yakunlandi</h3>
       <p>${currentTest.title}</p>
     </div>
-    
     <div class="results-summary">
       <div class="summary-item">
         <div class="summary-value correct">${results.correctAnswers}</div>
         <div class="summary-label">To'g'ri javoblar</div>
       </div>
-      
       <div class="summary-item">
         <div class="summary-value incorrect">${results.totalQuestions - results.correctAnswers}</div>
         <div class="summary-label">Noto'g'ri javoblar</div>
       </div>
-      
       <div class="summary-item">
         <div class="summary-value total">${results.totalQuestions}</div>
         <div class="summary-label">Jami savollar</div>
       </div>
     </div>
-    
     <div class="score-bar">
       <div class="score-fill" style="width: ${results.percentageCorrect}%"></div>
       <div class="score-percentage">${results.percentageCorrect}%</div>
     </div>
-    
     <div class="results-details">
       <h4>Savollar tahlili</h4>
       <div class="questions-review">
@@ -310,7 +310,6 @@ function displayResults(results) {
         `).join('')}
       </div>
     </div>
-    
     <div class="actions">
       <a href="home.html" class="action-btn secondary">
         <i data-lucide="home"></i>
@@ -322,24 +321,15 @@ function displayResults(results) {
       </a>
     </div>
   `;
-  
-  // Update results container
+
   testResultsElement.innerHTML = resultsHTML;
-  testResultsElement.classList.remove('hidden');
-  
-  // Initialize Lucide icons
   lucide.createIcons();
-  
-  // Animate score fill
-  setTimeout(() => {
-    const scoreFill = document.querySelector('.score-fill');
-    if (scoreFill) {
-      scoreFill.style.width = `${results.percentageCorrect}%`;
-    }
-  }, 100);
 }
 
-// Show error message
+/**
+ * Xatolik xabarini ko'rsatadi
+ * @param {string} message - Ko'rsatiladigan xabar matni
+ */
 function showErrorMessage(message) {
   const testIntroElement = document.getElementById('testIntro');
   if (testIntroElement) {
@@ -356,18 +346,21 @@ function showErrorMessage(message) {
   }
 }
 
-// Redirect to home page
+/**
+ * Foydalanuvchini asosiy sahifaga yo'naltiradi
+ */
 function redirectToHome() {
   window.location.href = 'home.html';
 }
 
-// Load sample test (for simulation)
+/**
+ * Namuna test ma'lumotlarini qaytaradi (haqiqiy ilovada serverdan yuklanadi)
+ */
 async function loadSampleTest() {
-  // This would normally fetch from the server
   return {
     "id": "python-basics",
     "title": "Python Basics",
-    "description": "Test your knowledge of Python fundamentals, syntax, data types, and basic programming concepts.",
+    "description": "Python asoslari haqida test",
     "time": 5,
     "questions": [
       {
@@ -389,42 +382,12 @@ async function loadSampleTest() {
           { "id": "a3", "text": ".cpp", "isCorrect": false },
           { "id": "a4", "text": ".txt", "isCorrect": false }
         ]
-      },
-      {
-        "id": "q3",
-        "text": "Quyidagi qaysi operator tenglikni tekshirish uchun ishlatiladi?",
-        "answers": [
-          { "id": "a1", "text": "=", "isCorrect": false },
-          { "id": "a2", "text": "==", "isCorrect": true },
-          { "id": "a3", "text": "!=", "isCorrect": false },
-          { "id": "a4", "text": "<>", "isCorrect": false }
-        ]
-      },
-      {
-        "id": "q4",
-        "text": "Python-da komentariy qo'shish uchun qaysi belgidan foydalaniladi?",
-        "answers": [
-          { "id": "a1", "text": "//", "isCorrect": false },
-          { "id": "a2", "text": "/*", "isCorrect": false },
-          { "id": "a3", "text": "#", "isCorrect": true },
-          { "id": "a4", "text": "--", "isCorrect": false }
-        ]
-      },
-      {
-        "id": "q5",
-        "text": "print(2 + 3 * 4) natijasi qanday bo'ladi?",
-        "answers": [
-          { "id": "a1", "text": "14", "isCorrect": false },
-          { "id": "a2", "text": "10", "isCorrect": false },
-          { "id": "a3", "text": "20", "isCorrect": false },
-          { "id": "a4", "text": "14", "isCorrect": true }
-        ]
       }
     ]
   };
 }
 
-// Add styles for error message
+// Xatolik xabarini ushlab turish uchun CSS
 document.head.insertAdjacentHTML('beforeend', `
   <style>
     .error-message {
@@ -432,21 +395,18 @@ document.head.insertAdjacentHTML('beforeend', `
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-      color: var(--error-color);
+      color: red;
     }
-    
     .error-message i {
       width: 48px;
       height: 48px;
     }
-    
     .error-message p {
       font-size: 1.1rem;
       margin-bottom: 1rem;
-      color: var(--text-primary);
     }
   </style>
 `);
 
-// Initialize the test module when DOM is loaded
+// DOM yuklanganda testni ishga tushiradi
 document.addEventListener('DOMContentLoaded', initTest);
