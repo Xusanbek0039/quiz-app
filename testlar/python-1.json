@@ -1,0 +1,58 @@
+{
+  "id": "python-basics",
+  "title": "Python Basics",
+  "description": "Test your knowledge of Python fundamentals, syntax, data types, and basic programming concepts.",
+  "time": 5,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Python dasturlash tilini kim yaratgan?",
+      "answers": [
+        { "id": "a1", "text": "Dennis Ritchie", "isCorrect": false },
+        { "id": "a2", "text": "James Gosling", "isCorrect": false },
+        { "id": "a3", "text": "Guido van Rossum", "isCorrect": true },
+        { "id": "a4", "text": "Bjarne Stroustrup", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Python fayllarining kengaytmasi qanday?",
+      "answers": [
+        { "id": "a1", "text": ".py", "isCorrect": true },
+        { "id": "a2", "text": ".java", "isCorrect": false },
+        { "id": "a3", "text": ".cpp", "isCorrect": false },
+        { "id": "a4", "text": ".txt", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Quyidagi qaysi operator tenglikni tekshirish uchun ishlatiladi?",
+      "answers": [
+        { "id": "a1", "text": "=", "isCorrect": false },
+        { "id": "a2", "text": "==", "isCorrect": true },
+        { "id": "a3", "text": "!=", "isCorrect": false },
+        { "id": "a4", "text": "<>", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Python-da komentariy qo'shish uchun qaysi belgidan foydalaniladi?",
+      "answers": [
+        { "id": "a1", "text": "//", "isCorrect": false },
+        { "id": "a2", "text": "/*", "isCorrect": false },
+        { "id": "a3", "text": "#", "isCorrect": true },
+        { "id": "a4", "text": "--", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "print(2 + 3 * 4) natijasi qanday bo'ladi?",
+      "answers": [
+        { "id": "a1", "text": "14", "isCorrect": false },
+        { "id": "a2", "text": "10", "isCorrect": false },
+        { "id": "a3", "text": "20", "isCorrect": false },
+        { "id": "a4", "text": "14", "isCorrect": true }
+      ]
+    }
+  ]
+}

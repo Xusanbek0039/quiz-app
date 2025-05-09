@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Ijodkorlari - Kirish</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="login-card">
+      <div class="logo-container">
+        <i data-lucide="code" class="logo-icon"></i>
+        <h1>IT Ijodkorlari</h1>
+      </div>
+      
+      <p class="welcome-text">Platforma testlarida o'z bilimlaringizni sinab ko'ring</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="firstName">Ismingiz</label>
+          <input type="text" id="firstName" name="firstName" required placeholder="Ismingizni kiriting">
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Familiyangiz</label>
+          <input type="text" id="lastName" name="lastName" required placeholder="Familiyangizni kiriting">
+        </div>
+        
+        <button type="submit" class="login-button">
+          <span>Boshlash</span>
+          <i data-lucide="arrow-right" class="button-icon"></i>
+        </button>
+      </form>
+      
+      <div class="decoration-element"></div>
+      <div class="decoration-element"></div>
+    </div>
+  </div>
+  
+  <script src="js/auth.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+{
+  "id": "python-basics-2",
+  "title": "Python Basics 2",
+  "description": "Test your knowledge of Python fundamentals including variables, data types, loops, functions, and basic programming concepts.",
+  "time": 10,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Quyidagilardan qaysi biri o'zgarmas (constant) qiymat emas?",
+      "answers": [
+        { "id": "a1", "text": "True", "isCorrect": false },
+        { "id": "a2", "text": "None", "isCorrect": false },
+        { "id": "a3", "text": "False", "isCorrect": false },
+        { "id": "a4", "text": "var", "isCorrect": true }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "type(5.0) natijasi qanday tur qaytaradi?",
+      "answers": [
+        { "id": "a1", "text": "int", "isCorrect": false },
+        { "id": "a2", "text": "str", "isCorrect": false },
+        { "id": "a3", "text": "float", "isCorrect": true },
+        { "id": "a4", "text": "bool", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "print(\"Hello\" + \"World\") ning natijasi nima?",
+      "answers": [
+        { "id": "a1", "text": "\"Hello World\"", "isCorrect": false },
+        { "id": "a2", "text": "\"HelloWorld\"", "isCorrect": true },
+        { "id": "a3", "text": "\"Hello+World\"", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Quyidagi qaysi funksiya foydalanuvchidan matn kirishini qabul qiladi?",
+      "answers": [
+        { "id": "a1", "text": "input()", "isCorrect": true },
+        { "id": "a2", "text": "read()", "isCorrect": false },
+        { "id": "a3", "text": "get()", "isCorrect": false },
+        { "id": "a4", "text": "scan()", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Quyidagi qaysi operator 'foydalanuvchi kiritmalarini' ekranga chiqarish uchun ishlatiladi?",
+      "answers": [
+        { "id": "a1", "text": "input()", "isCorrect": false },
+        { "id": "a2", "text": "print()", "isCorrect": true },
+        { "id": "a3", "text": "write()", "isCorrect": false },
+        { "id": "a4", "text": "log()", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "len(\"Programming\") funktsiyasining natijasi nima?",
+      "answers": [
+        { "id": "a1", "text": "9", "isCorrect": false },
+        { "id": "a2", "text": "10", "isCorrect": false },
+        { "id": "a3", "text": "11", "isCorrect": true },
+        { "id": "a4", "text": "8", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "if 10 % 3 == 1: print(\"Ha\") else: print(\"Yo'q\") kodining natijasi?",
+      "answers": [
+        { "id": "a1", "text": "\"Ha\"", "isCorrect": true },
+        { "id": "a2", "text": "\"Yo'q\"", "isCorrect": false },
+        { "id": "a3", "text": "Hech narsa chiqmaydi", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q8",
+      "text": "for i in range(2, 6): print(i) necha marta takrorlanadi?",
+      "answers": [
+        { "id": "a1", "text": "3", "isCorrect": false },
+        { "id": "a2", "text": "4", "isCorrect": true },
+        { "id": "a3", "text": "5", "isCorrect": false },
+        { "id": "a4", "text": "Cheksiz", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "x = 5; y = x > 3 and x < 10 natijada y ning qiymati qanday?",
+      "answers": [
+        { "id": "a1", "text": "False", "isCorrect": false },
+        { "id": "a2", "text": "True", "isCorrect": true },
+        { "id": "a3", "text": "0", "isCorrect": false },
+        { "id": "a4", "text": "None", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q10",
+      "text": "Quyidagilardan qaysi biri ro'yxat (list)?",
+      "answers": [
+        { "id": "a1", "text": "[1, 2, 3]", "isCorrect": true },
+        { "id": "a2", "text": "(1, 2, 3)", "isCorrect": false },
+        { "id": "a3", "text": "{1, 2, 3}", "isCorrect": false },
+        { "id": "a4", "text": "'1, 2, 3'", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q11",
+      "text": "Quyidagi funksiyaning natijasi nima? def greet(): return \"Salom\"; print(greet())",
+      "answers": [
+        { "id": "a1", "text": "Funksiya chaqirilmaydi", "isCorrect": false },
+        { "id": "a2", "text": "Salom", "isCorrect": true },
+        { "id": "a3", "text": "None", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q12",
+      "text": "while True: print('Loop') qancha marta ishlaydi?",
+      "answers": [
+        { "id": "a1", "text": "1 marta", "isCorrect": false },
+        { "id": "a2", "text": "Cheksiz", "isCorrect": true },
+        { "id": "a3", "text": "Hech qachon", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q13",
+      "text": "Quyidagilardan qaysi biri ma'lumot turi emas?",
+      "answers": [
+        { "id": "a1", "text": "int", "isCorrect": false },
+        { "id": "a2", "text": "string", "isCorrect": false },
+        { "id": "a3", "text": "input", "isCorrect": true },
+        { "id": "a4", "text": "float", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q14",
+      "text": "x = [1, 2, 3]; x.append(4) dan keyin x ning qiymati nima?",
+      "answers": [
+        { "id": "a1", "text": "[1, 2, 3]", "isCorrect": false },
+        { "id": "a2", "text": "[1, 2, 3, 4]", "isCorrect": true },
+        { "id": "a3", "text": "[4, 1, 2, 3]", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q15",
+      "text": "Quyidagi kodning natijasi nima? for i in [1, 2, 3]: print(i)",
+      "answers": [
+        { "id": "a1", "text": "1 2 3", "isCorrect": true },
+        { "id": "a2", "text": "[1, 2, 3]", "isCorrect": false },
+        { "id": "a3", "text": "i", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q16",
+      "text": "def sum(a, b): return a + b; print(sum(2, 3)) natijasi nima?",
+      "answers": [
+        { "id": "a1", "text": "23", "isCorrect": false },
+        { "id": "a2", "text": "5", "isCorrect": true },
+        { "id": "a3", "text": "6", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q17",
+      "text": "print(\"3\" + \"2\") natijasi nima?",
+      "answers": [
+        { "id": "a1", "text": "5", "isCorrect": false },
+        { "id": "a2", "text": "32", "isCorrect": true },
+        { "id": "a3", "text": "5", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q18",
+      "text": "x = 10; x -= 3 dan keyin x ning qiymati?",
+      "answers": [
+        { "id": "a1", "text": "10", "isCorrect": false },
+        { "id": "a2", "text": "7", "isCorrect": true },
+        { "id": "a3", "text": "3", "isCorrect": false },
+        { "id": "a4", "text": "13", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q19",
+      "text": "print(10 // 3) natijasi qanday?",
+      "answers": [
+        { "id": "a1", "text": "3.333", "isCorrect": false },
+        { "id": "a2", "text": "3", "isCorrect": true },
+        { "id": "a3", "text": "10/3", "isCorrect": false },
+        { "id": "a4", "text": "Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q20",
+      "text": "Quyidagi kod qanday xato beradi? print(age)",
+      "answers": [
+        { "id": "a1", "text": "SyntaxError", "isCorrect": false },
+        { "id": "a2", "text": "NameError", "isCorrect": true },
+        { "id": "a3", "text": "TypeError", "isCorrect": false },
+        { "id": "a4", "text": "IndentationError", "isCorrect": false }
+      ]
+    }
+  ]
+}
