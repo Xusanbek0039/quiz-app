@@ -1,0 +1,60 @@
+[
+  {
+    "id": "html-basics",
+    "title": "HTML Basics",
+    "description": "Test your knowledge of HTML fundamentals, tags, and semantics.",
+    "time": 5,
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What does HTML stand for?",
+        "answers": [
+          { "id": "a1", "text": "Hyper Text Markup Language", "isCorrect": true },
+          { "id": "a2", "text": "Hyper Transfer Markup Language", "isCorrect": false },
+          { "id": "a3", "text": "Hyper Text Markdown Language", "isCorrect": false },
+          { "id": "a4", "text": "Hyperlink Text Markup Language", "isCorrect": false }
+        ]
+      },
+      {
+        "id": "q2",
+        "text": "Which tag is used to create a hyperlink?",
+        "answers": [
+          { "id": "a1", "text": "<link>", "isCorrect": false },
+          { "id": "a2", "text": "<a>", "isCorrect": true },
+          { "id": "a3", "text": "<href>", "isCorrect": false },
+          { "id": "a4", "text": "<url>", "isCorrect": false }
+        ]
+      },
+      {
+        "id": "q3",
+        "text": "Which HTML element is used to define the title of a document?",
+        "answers": [
+          { "id": "a1", "text": "<meta>", "isCorrect": false },
+          { "id": "a2", "text": "<header>", "isCorrect": false },
+          { "id": "a3", "text": "<title>", "isCorrect": true },
+          { "id": "a4", "text": "<head>", "isCorrect": false }
+        ]
+      },
+      {
+        "id": "q4",
+        "text": "Which HTML tag is used to create an ordered list?",
+        "answers": [
+          { "id": "a1", "text": "<ul>", "isCorrect": false },
+          { "id": "a2", "text": "<ol>", "isCorrect": true },
+          { "id": "a3", "text": "<li>", "isCorrect": false },
+          { "id": "a4", "text": "<dl>", "isCorrect": false }
+        ]
+      },
+      {
+        "id": "q5",
+        "text": "What is the correct HTML element for the largest heading?",
+        "answers": [
+          { "id": "a1", "text": "<heading>", "isCorrect": false },
+          { "id": "a2", "text": "<h6>", "isCorrect": false },
+          { "id": "a3", "text": "<h1>", "isCorrect": true },
+          { "id": "a4", "text": "<head>", "isCorrect": false }
+        ]
+      }
+    ]
+  }
+]

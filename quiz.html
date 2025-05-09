@@ -1,275 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeTestX - Test</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Platform - Test</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="navbar-container"></div>
-    
-    <div class="container">
-        <div id="quizContainer" class="quiz-container">
-            <div class="quiz-header">
-                <h1 id="quizTitle">Test yuklanyapti...</h1>
-                <div class="quiz-info">
-                    <span id="questionCounter">0/0</span>
-                    <span id="timer">00:00</span>
-                </div>
-            </div>
-            
-            <div id="questionContainer" class="question-container">
-                <div class="loading-spinner"></div>
-            </div>
-            
-            <div class="quiz-navigation">
-                <button id="prevBtn" class="btn btn-secondary" disabled>Oldingi</button>
-                <button id="nextBtn" class="btn btn-primary">Keyingi</button>
-            </div>
+  <div id="navbar-container"></div>
+  
+  <div class="container quiz-container">
+    <div id="quiz-header" class="quiz-header">
+      <h2 id="quiz-title">Loading test...</h2>
+      <div class="quiz-meta">
+        <div id="timer" class="timer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="time-remaining">--:--</span>
         </div>
-        
-        <div id="resultsContainer" class="results-container" style="display: none;">
-            <h2>Test Natijalari</h2>
-            <div class="results-card">
-                <div class="results-header">
-                    <h3 id="resultTestTitle">Test nomi</h3>
-                    <p id="resultDate">Sana</p>
-                </div>
-                
-                <div class="results-score">
-                    <div class="score-circle">
-                        <div id="scoreValue">0/0</div>
-                        <div id="scorePercent">0%</div>
-                    </div>
-                </div>
-                
-                <div class="results-details">
-                    <p>Foydalanuvchi: <span id="resultUser">-</span></p>
-                    <p>To'g'ri javoblar: <span id="correctAnswers">0</span></p>
-                    <p>Noto'g'ri javoblar: <span id="incorrectAnswers">0</span></p>
-                </div>
-                
-                <div class="results-actions">
-                    <a href="index.html" class="btn btn-secondary">Bosh sahifaga</a>
-                    <button id="retryBtn" class="btn btn-primary">Qayta urinish</button>
-                </div>
-            </div>
+        <div id="progress" class="progress">
+          Question <span id="current-question">0</span> of <span id="total-questions">0</span>
         </div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is logged in
-            const currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
-                window.location.href = 'login.html';
-                return;
-            }
+    <div id="quiz-content" class="quiz-content">
+      <!-- Quiz content will be loaded here dynamically -->
+      <div class="skeleton-loader">
+        <div class="skeleton-question"></div>
+        <div class="skeleton-answer"></div>
+        <div class="skeleton-answer"></div>
+        <div class="skeleton-answer"></div>
+        <div class="skeleton-answer"></div>
+      </div>
+    </div>
 
-            // Load navbar
-            loadNavbar();
-            
-            // Initialize theme
-            initTheme();
-            
-            // Get test ID from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const testId = urlParams.get('id');
-            
-            if (!testId) {
-                window.location.href = 'index.html';
-                return;
-            }
-            
-            // Load test data
-            loadTest(testId);
-        });
+    <div id="quiz-navigation" class="quiz-navigation">
+      <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
+      <button id="next-btn" class="btn btn-primary">Next</button>
+    </div>
 
-        let currentTest = null;
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let timerInterval = null;
-        let timeLeft = 0;
+    <div id="results-screen" class="results-screen hidden">
+      <h2>Quiz Results</h2>
+      <div class="results-summary">
+        <div class="result-circle">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle-bg" d="M18 2.0845
+              a 15.9155 15.9155 0 0 1 0 31.831
+              a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+            <path id="circle-progress" class="circle" stroke-dasharray="0, 100" d="M18 2.0845
+              a 15.9155 15.9155 0 0 1 0 31.831
+              a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+            <text x="18" y="20.35" class="percentage" id="percentage">0%</text>
+          </svg>
+        </div>
+        <div class="result-details">
+          <p>Score: <span id="score">0</span> / <span id="max-score">0</span></p>
+          <p>Time taken: <span id="time-taken">0:00</span></p>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button id="review-btn" class="btn btn-secondary">Review Answers</button>
+        <button id="home-btn" class="btn btn-primary">Back to Home</button>
+      </div>
+    </div>
+  </div>
 
-        function loadTest(testId) {
-            // Get tests from localStorage
-            const tests = JSON.parse(localStorage.getItem('tests')) || [];
-            currentTest = tests.find(test => test.id === testId);
-            
-            if (!currentTest) {
-                alert('Test topilmadi!');
-                window.location.href = 'index.html';
-                return;
-            }
-            
-            // Initialize quiz
-            document.getElementById('quizTitle').textContent = currentTest.title;
-            document.getElementById('questionCounter').textContent = `1/${currentTest.questions.length}`;
-            
-            // Initialize timer
-            timeLeft = currentTest.time * 60; // Convert minutes to seconds
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-            
-            // Initialize user answers array
-            userAnswers = Array(currentTest.questions.length).fill(null);
-            
-            // Show first question
-            showQuestion(0);
-            
-            // Set up navigation buttons
-            document.getElementById('prevBtn').addEventListener('click', showPreviousQuestion);
-            document.getElementById('nextBtn').addEventListener('click', showNextQuestion);
-            document.getElementById('retryBtn').addEventListener('click', function() {
-                window.location.reload();
-            });
-        }
-
-        function showQuestion(index) {
-            if (!currentTest || index < 0 || index >= currentTest.questions.length) return;
-            
-            currentQuestionIndex = index;
-            const question = currentTest.questions[index];
-            
-            // Update question counter
-            document.getElementById('questionCounter').textContent = `${index + 1}/${currentTest.questions.length}`;
-            
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            const nextBtn = document.getElementById('nextBtn');
-            nextBtn.textContent = index === currentTest.questions.length - 1 ? 'Yakunlash' : 'Keyingi';
-            
-            // Show question
-            const questionContainer = document.getElementById('questionContainer');
-            questionContainer.innerHTML = `
-                <div class="question-text">${question.text}</div>
-                <div class="answers-container">
-                    ${question.answers.map((answer, answerIndex) => `
-                        <div class="answer-option ${userAnswers[index] === answerIndex ? 'selected' : ''}" 
-                             data-index="${answerIndex}">
-                            <div class="answer-checkbox"></div>
-                            <div class="answer-text">${answer.text}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            
-            // Add click event to answer options
-            const answerOptions = questionContainer.querySelectorAll('.answer-option');
-            answerOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const answerIndex = parseInt(this.getAttribute('data-index'));
-                    selectAnswer(answerIndex);
-                });
-            });
-            
-            // Add animation class
-            questionContainer.classList.add('fade-in');
-            setTimeout(() => {
-                questionContainer.classList.remove('fade-in');
-            }, 500);
-        }
-
-        function selectAnswer(answerIndex) {
-            userAnswers[currentQuestionIndex] = answerIndex;
-            
-            // Update UI
-            const answerOptions = document.querySelectorAll('.answer-option');
-            answerOptions.forEach(option => {
-                option.classList.remove('selected');
-                if (parseInt(option.getAttribute('data-index')) === answerIndex) {
-                    option.classList.add('selected');
-                }
-            });
-        }
-
-        function showPreviousQuestion() {
-            if (currentQuestionIndex > 0) {
-                showQuestion(currentQuestionIndex - 1);
-            }
-        }
-
-        function showNextQuestion() {
-            if (currentQuestionIndex < currentTest.questions.length - 1) {
-                showQuestion(currentQuestionIndex + 1);
-            } else {
-                finishQuiz();
-            }
-        }
-
-        function updateTimer() {
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                finishQuiz();
-                return;
-            }
-            
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            
-            document.getElementById('timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            timeLeft--;
-        }
-
-        function finishQuiz() {
-            clearInterval(timerInterval);
-            
-            // Calculate results
-            let score = 0;
-            const incorrectAnswers = [];
-            
-            currentTest.questions.forEach((question, index) => {
-                const userAnswerIndex = userAnswers[index];
-                if (userAnswerIndex !== null && question.answers[userAnswerIndex].isCorrect) {
-                    score++;
-                } else {
-                    incorrectAnswers.push(index);
-                }
-            });
-            
-            const total = currentTest.questions.length;
-            const percent = Math.round((score / total) * 100);
-            
-            // Save result
-            const currentUser = localStorage.getItem('currentUser');
-            const now = new Date();
-            const dateString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-            
-            const result = {
-                fullname: currentUser,
-                testId: currentTest.id,
-                score: score,
-                total: total,
-                percent: percent,
-                device: `${navigator.platform} ${navigator.userAgent.includes('Chrome') ? 'Chrome' : navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Other'}`,
-                date: dateString
-            };
-            
-            // Save to localStorage
-            let results = JSON.parse(localStorage.getItem('results')) || [];
-            results.push(result);
-            localStorage.setItem('results', JSON.stringify(results));
-            
-            // Show results
-            document.getElementById('quizContainer').style.display = 'none';
-            document.getElementById('resultsContainer').style.display = 'block';
-            
-            document.getElementById('resultTestTitle').textContent = currentTest.title;
-            document.getElementById('resultDate').textContent = dateString;
-            document.getElementById('scoreValue').textContent = `${score}/${total}`;
-            document.getElementById('scorePercent').textContent = `${percent}%`;
-            document.getElementById('resultUser').textContent = currentUser;
-            document.getElementById('correctAnswers').textContent = score;
-            document.getElementById('incorrectAnswers').textContent = total - score;
-            
-            // Add animation class
-            document.getElementById('resultsContainer').classList.add('fade-in');
-        }
-    </script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/quiz.js"></script>
 </body>
 </html>
