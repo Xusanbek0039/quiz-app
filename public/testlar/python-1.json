@@ -1,57 +1,107 @@
 {
-  "id": "python-basics",
-  "title": "Python Basics",
-  "description": "Test your knowledge of Python fundamentals, syntax, data types, and basic programming concepts.",
-  "time": 5,
+  "id": "python-beginner-test",
+  "title": "Python Boshlang'ich Testi",
+  "description": "Bu test Python dasturlash tilini yangi boshlagan dasturchilar uchun mo'ljallangan. 10 ta savolga javob bering.",
+  "time": 3,
   "questions": [
     {
       "id": "q1",
       "text": "Python dasturlash tilini kim yaratgan?",
       "answers": [
-        { "id": "a1", "text": "Dennis Ritchie", "isCorrect": false },
-        { "id": "a2", "text": "James Gosling", "isCorrect": false },
-        { "id": "a3", "text": "Guido van Rossum", "isCorrect": true },
-        { "id": "a4", "text": "Bjarne Stroustrup", "isCorrect": false }
+        { "id": "a1", "text": "A) Dennis Ritchie", "isCorrect": false },
+        { "id": "a2", "text": "B) James Gosling", "isCorrect": false },
+        { "id": "a3", "text": "C) Guido van Rossum", "isCorrect": true },
+        { "id": "a4", "text": "D) Bjarne Stroustrup", "isCorrect": false }
       ]
     },
     {
       "id": "q2",
       "text": "Python fayllarining kengaytmasi qanday?",
       "answers": [
-        { "id": "a1", "text": ".py", "isCorrect": true },
-        { "id": "a2", "text": ".java", "isCorrect": false },
-        { "id": "a3", "text": ".cpp", "isCorrect": false },
-        { "id": "a4", "text": ".txt", "isCorrect": false }
+        { "id": "a1", "text": "A) .py", "isCorrect": true },
+        { "id": "a2", "text": "B) .java", "isCorrect": false },
+        { "id": "a3", "text": "C) .cpp", "isCorrect": false },
+        { "id": "a4", "text": "D) .txt", "isCorrect": false }
       ]
     },
     {
       "id": "q3",
-      "text": "Quyidagi qaysi operator tenglikni tekshirish uchun ishlatiladi?",
+      "text": "Quyidagi operatorlardan qaysi biri qiymat biriktirish uchun ishlatiladi?",
       "answers": [
-        { "id": "a1", "text": "=", "isCorrect": false },
-        { "id": "a2", "text": "==", "isCorrect": true },
-        { "id": "a3", "text": "!=", "isCorrect": false },
-        { "id": "a4", "text": "<>", "isCorrect": false }
+        { "id": "a1", "text": "A) ==", "isCorrect": false },
+        { "id": "a2", "text": "B) =", "isCorrect": true },
+        { "id": "a3", "text": "C) +", "isCorrect": false },
+        { "id": "a4", "text": "D) :", "isCorrect": false }
       ]
     },
     {
       "id": "q4",
-      "text": "Python-da komentariy qo'shish uchun qaysi belgidan foydalaniladi?",
+      "text": "type(25) funksiyasi qanday tur qaytaradi?",
       "answers": [
-        { "id": "a1", "text": "//", "isCorrect": false },
-        { "id": "a2", "text": "/*", "isCorrect": false },
-        { "id": "a3", "text": "#", "isCorrect": true },
-        { "id": "a4", "text": "--", "isCorrect": false }
+        { "id": "a1", "text": "A) float", "isCorrect": false },
+        { "id": "a2", "text": "B) int", "isCorrect": true },
+        { "id": "a3", "text": "C) str", "isCorrect": false },
+        { "id": "a4", "text": "D) bool", "isCorrect": false }
       ]
     },
     {
       "id": "q5",
-      "text": "print(2 + 3 * 4) natijasi qanday bo'ladi?",
+      "text": "Quyidagi kod qanday natija beradi? print(\"Salom\" + \"Dunyo\")",
       "answers": [
-        { "id": "a1", "text": "14", "isCorrect": false },
-        { "id": "a2", "text": "10", "isCorrect": false },
-        { "id": "a3", "text": "20", "isCorrect": false },
-        { "id": "a4", "text": "14", "isCorrect": true }
+        { "id": "a1", "text": "A) Salom Dunyo", "isCorrect": false },
+        { "id": "a2", "text": "B) SalomDunyo", "isCorrect": true },
+        { "id": "a3", "text": "C) Salom+Dunyo", "isCorrect": false },
+        { "id": "a4", "text": "D) Xato", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "Foydalanuvchidan kirish qabul qilish uchun qaysi funksiya ishlatiladi?",
+      "answers": [
+        { "id": "a1", "text": "A) input()", "isCorrect": true },
+        { "id": "a2", "text": "B) print()", "isCorrect": false },
+        { "id": "a3", "text": "C) write()", "isCorrect": false },
+        { "id": "a4", "text": "D) log()", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "# Bu belgi nima vazifa bajaradi?",
+      "answers": [
+        { "id": "a1", "text": "A) Funksiya chaqirish", "isCorrect": false },
+        { "id": "a2", "text": "B) Komentariy", "isCorrect": true },
+        { "id": "a3", "text": "C) Operator", "isCorrect": false },
+        { "id": "a4", "text": "D) O'zgaruvchi e'lon qilish", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q8",
+      "text": "x = 5; x += 3 dan keyin x ning qiymati nechaga teng?",
+      "answers": [
+        { "id": "a1", "text": "A) 5", "isCorrect": false },
+        { "id": "a2", "text": "B) 3", "isCorrect": false },
+        { "id": "a3", "text": "C) 8", "isCorrect": true },
+        { "id": "a4", "text": "D) 15", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "len(\"Python\") funktsiyasining natijasi qanday?",
+      "answers": [
+        { "id": "a1", "text": "A) 5", "isCorrect": false },
+        { "id": "a2", "text": "B) 6", "isCorrect": true },
+        { "id": "a3", "text": "C) 7", "isCorrect": false },
+        { "id": "a4", "text": "D) 4", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q10",
+      "text": "input() funksiyasi qanday turdagi qiymat qaytaradi?",
+      "answers": [
+        { "id": "a1", "text": "A) int", "isCorrect": false },
+        { "id": "a2", "text": "B) float", "isCorrect": false },
+        { "id": "a3", "text": "C) str", "isCorrect": true },
+        { "id": "a4", "text": "D) list", "isCorrect": false }
       ]
     }
   ]
