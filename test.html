@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Ijodkorlari - Test</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/test.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i data-lucide="code" class="logo-icon"></i>
+        <h1>IT Ijodkorlari</h1>
+      </div>
+      <nav>
+        <a href="home.html">
+          <i data-lucide="home"></i>
+          <span>Asosiy</span>
+        </a>
+        <a href="statistika.html">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Statistika</span>
+        </a>
+        <a href="https://youtube.com" target="_blank">
+          <i data-lucide="youtube"></i>
+          <span>YouTube</span>
+        </a>
+        <a href="https://github.com" target="_blank">
+          <i data-lucide="github"></i>
+          <span>GitHub</span>
+        </a>
+      </nav>
+      <div class="user-section">
+        <div class="user-info">
+          <span id="userFullName">Foydalanuvchi</span>
+        </div>
+        <button id="themeToggle" class="theme-toggle">
+          <i data-lucide="sun" class="light-icon"></i>
+          <i data-lucide="moon" class="dark-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="test-container">
+      <div class="test-header">
+        <h2 id="testTitle">Test nomi</h2>
+        <div class="test-info">
+          <div class="info-item">
+            <i data-lucide="info"></i>
+            <span id="testDescription">Test haqida ma'lumot</span>
+          </div>
+          <div class="info-item">
+            <i data-lucide="clock"></i>
+            <span id="testTime">0</span> daqiqa
+          </div>
+          <div class="info-item">
+            <i data-lucide="help-circle"></i>
+            <span id="questionsCount">0</span> ta savol
+          </div>
+        </div>
+      </div>
+
+      <div id="testIntro" class="test-intro">
+        <p>Testni boshlashga tayyormisiz?</p>
+        <button id="startTestBtn" class="start-test-btn">
+          <i data-lucide="play"></i>
+          <span>Testni boshlash</span>
+        </button>
+      </div>
+
+      <div id="testContent" class="test-content hidden">
+        <div class="progress-container">
+          <div class="progress-text">
+            <span id="currentQuestion">1</span> / <span id="totalQuestions">0</span>
+          </div>
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div id="questionContainer" class="question-container">
+          <!-- Question will be displayed here -->
+        </div>
+
+        <div class="test-navigation">
+          <button id="prevQuestionBtn" class="nav-btn prev-btn" disabled>
+            <i data-lucide="arrow-left"></i>
+            <span>Oldingi</span>
+          </button>
+          <button id="nextQuestionBtn" class="nav-btn next-btn">
+            <span>Keyingi</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+          <button id="finishTestBtn" class="nav-btn finish-btn hidden">
+            <span>Yakunlash</span>
+            <i data-lucide="check"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="testResults" class="test-results hidden">
+        <!-- Results will be displayed here -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 IT Ijodkorlari | Barcha huquqlar himoyalangan</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/testEngine.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
