@@ -96,7 +96,7 @@ function renderQuizHistory(quizzes, filter = 'all') {
   if (filteredQuizzes.length === 0) {
     const noHistoryElement = document.createElement('div');
     noHistoryElement.className = 'no-history';
-    noHistoryElement.textContent = 'No quiz history found.';
+    noHistoryElement.textContent = 'Xech qanday test natijalari mavjud emas.';
     historyListElement.appendChild(noHistoryElement);
     return;
   }
