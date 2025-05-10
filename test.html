@@ -23,6 +23,14 @@
           </svg>
           <span id="timer">00:00</span>
         </div>
+
+        <div class="timer-container">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="joriy_time">00:00</span>
+        </div>
       </div>
       <div class="theme-toggle">
         <button id="theme-toggle-btn" aria-label="Toggle dark mode">
@@ -46,7 +54,7 @@
 
     <main>
       <div id="quiz-selection" class="quiz-selection">
-        <h2>Select a Quiz</h2>
+        <h2>Test tanlang</h2>
         <div class="quiz-categories">
           <div class="quiz-card" data-category="python" data-time="20" data-questions="25">
             <div class="quiz-card-icon">
@@ -59,7 +67,7 @@
             </div>
             <div class="quiz-card-content">
               <h3>Python</h3>
-              <p>25 questions • 20 minutes</p>
+              <p>25 savol • 20 daqiqa</p>
             </div>
           </div>
           <div class="quiz-card" data-category="python-basic" data-time="10" data-questions="15">
@@ -72,8 +80,8 @@
               </svg>
             </div>
             <div class="quiz-card-content">
-              <h3>Python Basic</h3>
-              <p>15 questions • 10 minutes</p>
+              <h3>Python boshlang'ich</h3>
+              <p>15 savol • 10 daqiqa</p>
             </div>
           </div>
           <div class="quiz-card" data-category="html" data-time="15" data-questions="20">
@@ -84,7 +92,7 @@
             </div>
             <div class="quiz-card-content">
               <h3>HTML</h3>
-              <p>20 questions • 15 minutes</p>
+              <p>20 savol • 15 daqiqa</p>
             </div>
           </div>
           <div class="quiz-card" data-category="js" data-time="15" data-questions="20">
@@ -95,7 +103,7 @@
             </div>
             <div class="quiz-card-content">
               <h3>JavaScript</h3>
-              <p>20 questions • 15 minutes</p>
+              <p>20 savol • 15 daqiqa</p>
             </div>
           </div>
         </div>
@@ -103,7 +111,7 @@
 
       <div id="quiz-container" class="quiz-container hidden">
         <div class="quiz-header">
-          <h2 id="quiz-title">Quiz Title</h2>
+          <h2 id="quiz-title">Viktorena nomi</h2>
           <div class="quiz-progress">
             <span id="current-question">1</span>/<span id="total-questions">25</span>
           </div>
@@ -121,13 +129,13 @@
         </div>
 
         <div class="quiz-actions">
-          <button id="finish-quiz" class="btn secondary-btn">Finish Quiz</button>
+          <button id="finish-quiz" class="btn secondary-btn">Testni yakunlash</button>
         </div>
       </div>
 
       <div id="results-container" class="results-container hidden">
         <div class="results-header">
-          <h2>Quiz Results</h2>
+          <h2>Natijalar</h2>
         </div>
         <div class="results-summary">
           <div class="result-card">
@@ -138,7 +146,7 @@
               </svg>
             </div>
             <div class="result-details">
-              <h3>Correct</h3>
+              <h3>To'gri</h3>
               <p id="correct-count">0</p>
             </div>
           </div>
@@ -151,7 +159,7 @@
               </svg>
             </div>
             <div class="result-details">
-              <h3>Incorrect</h3>
+              <h3>Noto'g'ri</h3>
               <p id="incorrect-count">0</p>
             </div>
           </div>
@@ -167,7 +175,7 @@
               </svg>
             </div>
             <div class="result-details">
-              <h3>Score</h3>
+              <h3>Natija</h3>
               <p id="percentage">0%</p>
             </div>
           </div>
@@ -179,21 +187,21 @@
               </svg>
             </div>
             <div class="result-details">
-              <h3>Time</h3>
+              <h3>Vaqt</h3>
               <p id="time-taken">00:00</p>
             </div>
           </div>
         </div>
         
         <div class="detailed-results">
-          <h3>Question Details</h3>
+          <h3>Javoblar</h3>
           <div id="questions-review" class="questions-review">
             <!-- Question review will be inserted here dynamically -->
           </div>
         </div>
         
         <div class="results-actions">
-          <button id="back-to-quiz" class="btn primary-btn">Try Another Quiz</button>
+          <button id="back-to-quiz" class="btn primary-btn">Qaytadan urinish</button>
         </div>
       </div>
     </main>
@@ -227,5 +235,27 @@
   <script src="js/theme.js"></script>
   <script src="js/timer.js"></script>
   <script src="js/quiz.js"></script>
+  <script>
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
+  
+      // Har bir son bir xonali bo‘lsa, oldiga 0 qo‘shamiz
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+  
+      document.getElementById('joriy_time').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+  
+    // Boshlang‘ich ko‘rsatish
+    updateTime();
+  
+    // Har soniyada yangilab borish
+    setInterval(updateTime, 1000);
+  </script>
+  
 </body>
 </html>
