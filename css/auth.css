@@ -1,0 +1,118 @@
+/* Auth Specific Styles */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-8);
+  animation: fadeInDown 800ms ease-out;
+}
+
+.logo-container svg {
+  width: 64px;
+  height: 64px;
+  color: var(--primary-600);
+  margin-bottom: var(--spacing-4);
+}
+
+.auth-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-8);
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  animation: fadeInUp 800ms ease-out;
+}
+
+.auth-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px var(--shadow-color-strong);
+}
+
+.auth-card h2 {
+  margin-bottom: var(--spacing-4);
+  text-align: center;
+}
+
+.auth-card p {
+  text-align: center;
+  margin-bottom: var(--spacing-6);
+  color: var(--text-tertiary);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-6);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-group input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus {
+  border-color: var(--primary-400);
+  box-shadow: 0 0 0 3px var(--primary-100);
+  outline: none;
+}
+
+.dark-mode .form-group input:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+#auth-form button {
+  width: 100%;
+  margin-top: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--spacing-6);
+  }
+}

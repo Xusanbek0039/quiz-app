@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "Which tag is used to define an HTML document?",
+    "options": ["<html>", "<body>", "<doc>", "<root>"],
+    "answer": 0
+  },
+  {
+    "id": 2,
+    "question": "Which attribute is used to define inline styles in HTML?",
+    "options": ["class", "style", "css", "format"],
+    "answer": 1
+  },
+  {
+    "id": 3,
+    "question": "Which HTML element is used to define a paragraph?",
+    "options": ["<paragraph>", "<p>", "<para>", "<text>"],
+    "answer": 1
+  },
+  {
+    "id": 4,
+    "question": "What does HTML stand for?",
+    "options": ["Hypertext Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hypertext Machine Language"],
+    "answer": 0
+  },
+  {
+    "id": 5,
+    "question": "Which HTML tag is used to define a hyperlink?",
+    "options": ["<link>", "<a>", "<href>", "<url>"],
+    "answer": 1
+  },
+  {
+    "id": 6,
+    "question": "Which HTML element is used to define the title of a document?",
+    "options": ["<header>", "<title>", "<h1>", "<head>"],
+    "answer": 1
+  },
+  {
+    "id": 7,
+    "question": "Which HTML element is used to define an image?",
+    "options": ["<image>", "<img>", "<picture>", "<src>"],
+    "answer": 1
+  },
+  {
+    "id": 8,
+    "question": "Which HTML element is used to define a list item?",
+    "options": ["<li>", "<item>", "<list>", "<ul>"],
+    "answer": 0
+  },
+  {
+    "id": 9,
+    "question": "Which HTML attribute is used to specify an alternative text for an image?",
+    "options": ["title", "src", "alt", "description"],
+    "answer": 2
+  },
+  {
+    "id": 10,
+    "question": "Which HTML element is used to define a table?",
+    "options": ["<table>", "<tab>", "<tr>", "<grid>"],
+    "answer": 0
+  },
+  {
+    "id": 11,
+    "question": "What is the correct HTML for creating a checkbox?",
+    "options": ["<input type=\"check\">", "<check>", "<input type=\"checkbox\">", "<checkbox>"],
+    "answer": 2
+  },
+  {
+    "id": 12,
+    "question": "Which HTML element defines navigation links?",
+    "options": ["<nav>", "<navigation>", "<links>", "<navbar>"],
+    "answer": 0
+  },
+  {
+    "id": 13,
+    "question": "Which character is used to indicate an end tag in HTML?",
+    "options": ["$", "^", "/", "*"],
+    "answer": 2
+  },
+  {
+    "id": 14,
+    "question": "What is the correct HTML for making a drop-down list?",
+    "options": ["<select>", "<input type=\"dropdown\">", "<input type=\"list\">", "<list>"],
+    "answer": 0
+  },
+  {
+    "id": 15,
+    "question": "What is the correct HTML for creating a text input field?",
+    "options": ["<textfield>", "<input type=\"text\">", "<input type=\"textfield\">", "<textinput>"],
+    "answer": 1
+  },
+  {
+    "id": 16,
+    "question": "Which HTML element is used to specify a footer for a document or section?",
+    "options": ["<footer>", "<bottom>", "<section>", "<banner>"],
+    "answer": 0
+  },
+  {
+    "id": 17,
+    "question": "What does the <br> tag do?",
+    "options": ["Makes text bold", "Creates a line break", "Creates a border", "Creates a bullet list"],
+    "answer": 1
+  },
+  {
+    "id": 18,
+    "question": "How do you create a numbered list in HTML?",
+    "options": ["<ul>", "<dl>", "<ol>", "<list>"],
+    "answer": 2
+  },
+  {
+    "id": 19,
+    "question": "Which HTML attribute specifies the URL of a linked document?",
+    "options": ["url", "href", "src", "link"],
+    "answer": 1
+  },
+  {
+    "id": 20,
+    "question": "Which attribute is used to provide a unique identifier for an HTML element?",
+    "options": ["class", "name", "id", "key"],
+    "answer": 2
+  }
+]

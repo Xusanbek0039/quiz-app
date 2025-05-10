@@ -1,102 +1,104 @@
 /**
- * Authentication module for IT Ijodkorlari
- * Handles user authentication and session management
+ * Authentication functionality for the ITC Quiz App
  */
 
-// Local storage keys
-const STORAGE_KEYS = {
-  USER: 'it_ijodkorlari_user',
-  THEME: 'it_ijodkorlari_theme'
-};
-
-// Check if user is logged in
+// Check if user is already authenticated
 function checkAuth() {
-  const user = localStorage.getItem(STORAGE_KEYS.USER);
-  
-  // If on index page and user exists, redirect to home
-  if (window.location.pathname.includes('index') && user) {
-    window.location.href = 'home.html';
-    return;
+  const userData = localStorage.getItem('itc_quiz_user');
+  if (userData) {
+    // If on index page and already authenticated, redirect to test page
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+      window.location.href = 'test.html';
+    }
+    return true;
   }
   
-  // If on other pages and user doesn't exist, redirect to index
-  if (!window.location.pathname.includes('index') && !user) {
+  // If on test page but not authenticated, redirect to index page
+  if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/stats.html' && window.location.pathname !== 'stats.html') {
     window.location.href = 'index.html';
-    return;
   }
-  
-  // Update user display name if on other pages
-  if (!window.location.pathname.includes('index') && user) {
-    updateUserDisplay(JSON.parse(user));
-  }
+  return false;
 }
 
-// Login form submission handler
-function setupLoginForm() {
-  const loginForm = document.getElementById('loginForm');
-  if (!loginForm) return;
+// Handle auth form submission
+function setupAuthForm() {
+  const authForm = document.getElementById('auth-form');
+  if (!authForm) return;
   
-  loginForm.addEventListener('submit', (e) => {
+  authForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
     
     if (!firstName || !lastName) {
-      alert('Iltimos, ism va familiyangizni kiriting');
+      alert('Please enter both first name and last name');
       return;
     }
     
-    // Save user info to local storage
-    const user = { firstName, lastName };
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+    // Save user data
+    const userData = {
+      firstName,
+      lastName,
+      fullName: `${firstName} ${lastName}`,
+      id: Date.now().toString(),
+      lastLogin: new Date().toISOString()
+    };
     
-    // Add animation before redirect
-    const loginCard = document.querySelector('.login-card');
-    loginCard.style.animation = 'fadeOutUp 0.5s forwards';
+    localStorage.setItem('itc_quiz_user', JSON.stringify(userData));
     
-    // Redirect to home page after animation
-    setTimeout(() => {
-      window.location.href = 'home.html';
-    }, 500);
+    // Redirect to the test page
+    window.location.href = 'test.html';
   });
 }
 
-// Update user display in header
-function updateUserDisplay(user) {
-  const userFullNameElement = document.getElementById('userFullName');
-  if (!userFullNameElement) return;
+// Get current user data
+function getCurrentUser() {
+  const userData = localStorage.getItem('itc_quiz_user');
+  if (userData) {
+    return JSON.parse(userData);
+  }
+  return null;
+}
+
+// Display user name in the UI
+function displayUserInfo() {
+  const userNameElement = document.getElementById('user-name');
+  const userNameStatsElement = document.getElementById('user-name-stats');
   
-  userFullNameElement.textContent = `${user.firstName} ${user.lastName}`;
-}
-
-// Setup logout functionality
-function setupLogout() {
-  // We can add a logout button later if needed
-}
-
-// Initialize authentication
-function initAuth() {
-  checkAuth();
-  setupLoginForm();
-  setupLogout();
-}
-
-// Run initialization when DOM is loaded
-document.addEventListener('DOMContentLoaded', initAuth);
-
-// Animation for login form out
-document.head.insertAdjacentHTML('beforeend', `
-  <style>
-    @keyframes fadeOutUp {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
+  const user = getCurrentUser();
+  
+  if (user) {
+    if (userNameElement) {
+      userNameElement.textContent = user.fullName;
     }
-  </style>
-`);
+    
+    if (userNameStatsElement) {
+      userNameStatsElement.textContent = user.fullName;
+    }
+  }
+}
+
+// Initialize auth functionality
+function initAuth() {
+  // Check auth status
+  checkAuth();
+  
+  // Setup auth form if on auth page
+  setupAuthForm();
+  
+  // Display user info if authenticated
+  displayUserInfo();
+  
+  // Setup stats link
+  const statsLink = document.getElementById('stats-link');
+  if (statsLink) {
+    statsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'stats.html';
+    });
+  }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initAuth);

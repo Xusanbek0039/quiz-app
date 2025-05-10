@@ -1,0 +1,294 @@
+/* Base Styles */
+:root {
+  /* Color System */
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #818cf8;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --primary-800: #3730a3;
+  --primary-900: #312e81;
+  
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  --success-50: #ecfdf5;
+  --success-500: #10b981;
+  --success-600: #059669;
+  
+  --error-50: #fef2f2;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+
+  /* Light Theme Default */
+  --bg-primary: var(--gray-50);
+  --bg-secondary: white;
+  --bg-tertiary: var(--gray-100);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --text-tertiary: var(--gray-500);
+  --border-color: var(--gray-200);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.07);
+  
+  /* Animation */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 350ms;
+  
+  /* Spacing based on 8px system */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem;  /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem;    /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem;  /* 24px */
+  --spacing-8: 2rem;    /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem;   /* 48px */
+  --spacing-16: 4rem;   /* 64px */
+  
+  /* Other */
+  --border-radius-sm: 0.25rem;
+  --border-radius: 0.5rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 1.5rem;
+  
+  /* Binary background */
+  --binary-opacity: 0.03;
+}
+
+/* Dark Theme */
+.dark-mode {
+  --bg-primary: var(--gray-900);
+  --bg-secondary: var(--gray-800);
+  --bg-tertiary: var(--gray-700);
+  --text-primary: var(--gray-50);
+  --text-secondary: var(--gray-200);
+  --text-tertiary: var(--gray-400);
+  --border-color: var(--gray-700);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-strong: rgba(0, 0, 0, 0.5);
+  --binary-opacity: 0.06;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 16px;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Binary Background */
+.binary-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M10 10h5v5h-5zM25 10h5v5h-5zM40 10h5v5h-5zM10 25h5v5h-5zM25 25h5v5h-5zM40 25h5v5h-5zM10 40h5v5h-5zM25 40h5v5h-5zM40 40h5v5h-5zM55 10h5v5h-5zM70 10h5v5h-5zM85 10h5v5h-5zM55 25h5v5h-5zM70 25h5v5h-5zM85 25h5v5h-5zM55 40h5v5h-5zM70 40h5v5h-5zM85 40h5v5h-5zM10 55h5v5h-5zM25 55h5v5h-5zM40 55h5v5h-5zM10 70h5v5h-5zM25 70h5v5h-5zM40 70h5v5h-5zM10 85h5v5h-5zM25 85h5v5h-5zM40 85h5v5h-5zM55 55h5v5h-5zM70 55h5v5h-5zM85 55h5v5h-5zM55 70h5v5h-5zM70 70h5v5h-5zM85 70h5v5h-5zM55 85h5v5h-5zM70 85h5v5h-5zM85 85h5v5h-5z'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: var(--binary-opacity);
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  padding: var(--spacing-4) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Main */
+main {
+  flex: 1;
+  width: 100%;
+  padding: var(--spacing-4) 0;
+}
+
+/* Footer */
+footer {
+  padding: var(--spacing-6) 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-6);
+}
+
+.social-links a {
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.social-links a:hover {
+  color: var(--primary-500);
+}
+
+/* Theme Toggle */
+.theme-toggle button {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.theme-toggle button:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.sun-icon, .moon-icon {
+  display: block;
+}
+
+.dark-mode .sun-icon {
+  display: block;
+}
+
+.dark-mode .moon-icon {
+  display: none;
+}
+
+.sun-icon {
+  display: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-4);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: var(--spacing-4);
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3) var(--spacing-6);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 1rem;
+  border: none;
+  outline: none;
+}
+
+.primary-btn {
+  background-color: var(--primary-600);
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-700);
+}
+
+.secondary-btn {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.secondary-btn:hover {
+  background-color: var(--gray-300);
+  color: var(--text-primary);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: 0.875rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  .btn {
+    padding: var(--spacing-2) var(--spacing-4);
+  }
+}
