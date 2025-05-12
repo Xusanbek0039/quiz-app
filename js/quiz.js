@@ -327,7 +327,375 @@ const testData = {
       "question": "Python-da __init__ metodi nima vazifani bajaradi?",
       "options": ["Ob'yektni o'chirish", "Ob'yekt yaratilganda avtomatik chaqiriladi", "Metodni qayta aniqlash", "Klassni aniqlash"],
       "answer": 1
-    }
+    },
+    {
+        "id": 51,
+        "question": "'None' nima ifodalaydi?",
+        "options": ["Bo'sh qiymat", "False qiymati", "Xato", "0 soni"],
+        "answer": 0
+    },
+    {
+        "id": 52,
+        "question": "Quyidagilardan qaysi biri 'mutable' emas?",
+        "options": ["list", "dict", "set", "tuple"],
+        "answer": 3
+    },
+    {
+        "id": 53,
+        "question": "Python-da fayl yopish uchun qaysi metod kerak?",
+        "options": ["close()", "exit()", "end()", "finish()"],
+        "answer": 0
+    },
+    {
+        "id": 54,
+        "question": "Quyidagi kod natijasi qanday?\nx = [1, 2]; y = x; y.append(3); print(x)",
+        "options": ["[1, 2]", "[1, 2, 3]", "Xato", "[ ]"],
+        "answer": 1
+    },
+    {
+        "id": 55,
+        "question": "sorted() funktsiyasi qaytadi:",
+        "options": ["Yangi saralangan ro'yxat", "Asl ro'yxatni o'zgartiradi", "Set", "Tuple"],
+        "answer": 0
+    },
+    {
+        "id": 56,
+        "question": "Kvadrat ildiz hisoblash uchun qaysi moduldan foydalaniladi?",
+        "options": ["math", "random", "os", "sys"],
+        "answer": 0
+    },
+    {
+        "id": 57,
+        "question": "Quyidagi kod natijasi qanday?\nprint('hello'.upper())",
+        "options": ["HELLO", "Hello", "hello", "Error"],
+        "answer": 0
+    },
+    {
+        "id": 58,
+        "question": "List comprehension bilan toq sonlar ketma-ketligini hosil qiling:",
+        "options": ["[x for x in range(10) if x % 2 == 1]", "[x*2 for x in range(10)]", "[x for x in range(10)]", "[x+1 for x in range(10)]"],
+        "answer": 0
+    },
+    {
+        "id": 59,
+        "question": "Funksiya ichida lokal o'zgaruvchi e'lon qilish uchun qaysi so'z ishlatiladi?",
+        "options": ["global", "nonlocal", "local", "var"],
+        "answer": 1
+    },
+    {
+        "id": 60,
+        "question": "Quyidagi kod natijasi qanday?\nprint(3 in {1: 'a', 2: 'b'})",
+        "options": ["True", "False", "Xato", "None"],
+        "answer": 1
+    },
+    {
+        "id": 61,
+        "question": "JSON formatidan Python obyektiga o'tish uchun qaysi metod kerak?",
+        "options": ["json.loads()", "json.dumps()", "json.load()", "json.dump()"],
+        "answer": 0
+    },
+    {
+        "id": 62,
+        "question": "Satrda belgini almashtirish uchun qaysi metod ishlatiladi?",
+        "options": ["replace()", "change()", "modify()", "update()"],
+        "answer": 0
+    },
+    {
+        "id": 63,
+        "question": "Quyidagi kod natijasi qanday?\nprint(bool([]))",
+        "options": ["True", "False", "None", "Xato"],
+        "answer": 1
+    },
+    {
+        "id": 64,
+        "question": "Piknik operatori (walrus) qachon kirtilgan?",
+        "options": ["Python 3.6", "Python 3.8", "Python 3.10", "Python 3.12"],
+        "answer": 1
+    },
+    {
+        "id": 65,
+        "question": "OOPda inkapsulyatsiya nima?",
+        "options": ["Metodlarni yashirish", "Klass xususiyatlarini himoya qilish", "Klasslarni meros qilib olish", "Hammasi"],
+        "answer": 1
+    },
+    {
+        "id": 66,
+        "question": "Quyidagi kod natijasi qanday?\nprint([1, 2] + [3])",
+        "options": ["[1, 2, 3]", "[1, 2, [3]]", "Xato", "6"],
+        "answer": 0
+    },
+    {
+        "id": 67,
+        "question": "Python-da 'with' operatori nima uchun kerak?",
+        "options": ["Fayllarni avtomatik yopish", "Tsikl yaratish", "Shart tekshirish", "Funksiya chaqirish"],
+        "answer": 0
+    },
+    {
+        "id": 68,
+        "question": "Quyidagi kod natijasi qanday?\nprint(set([1, 2, 2, 3]))",
+        "options": ["{1, 2, 3}", "{1, 2}", "{1, 2, 2, 3}", "Xato"],
+        "answer": 0
+    },
+    {
+        "id": 69,
+        "question": "Funksiya parametri sifatida *args nima qiladi?",
+        "options": ["Cheksiz kalitli argumentlar", "Cheksiz pozitsion argumentlar", "Bitta qiymat", "Ro'yxat"],
+        "answer": 1
+    },
+    {
+        "id": 70,
+        "question": "Quyidagi kod natijasi qanday?\nprint('abc'.isalpha())",
+        "options": ["True", "False", "None", "Xato"],
+        "answer": 0
+    },
+    {
+      "id": 71,
+      "question": "Quyidagi kod natijasi qanday?\nprint((1, 2) + (3))",
+      "options": ["(1, 2, 3)", "(1, 2, (3))", "TypeError", "Xato"],
+      "answer": 2
+    },
+      {
+          "id": 71,
+          "question": "Quyidagi kod natijasi qanday?\nprint('123abc'.isalpha())",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 1
+      },
+      {
+          "id": 72,
+          "question": "Quyidagi kod natijasi qanday?\nprint(bool('False'))",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 0
+      },
+      {
+          "id": 73,
+          "question": "Quyidagi kod natijasi qanday?\nprint(len(set('hello')))",
+          "options": ["4", "5", "3", "6"],
+          "answer": 0
+      },
+      {
+          "id": 74,
+          "question": "Quyidagi kod natijasi qanday?\nprint('hello world'.title())",
+          "options": ["Hello World", "Hello world", "hello World", "HELLO WORLD"],
+          "answer": 0
+      },
+      {
+          "id": 75,
+          "question": "Quyidagi kod natijasi qanday?\nprint(''.join(reversed('abc')))",
+          "options": ["cba", "abc", "bac", "bca"],
+          "answer": 0
+      },
+      {
+          "id": 76,
+          "question": "Quyidagi kod natijasi qanday?\nprint([i for i in range(3)])",
+          "options": ["[0, 1, 2]", "[1, 2, 3]", "[0, 1, 2, 3]", "[1, 2]"],
+          "answer": 0
+      },
+      {
+          "id": 77,
+          "question": "Quyidagi kod natijasi qanday?\nprint((lambda x: x ** 2)(3))",
+          "options": ["6", "9", "3", "12"],
+          "answer": 1
+      },
+      {
+          "id": 78,
+          "question": "Quyidagi kod natijasi qanday?\nprint(10 // 3)",
+          "options": ["3", "3.33", "4", "0"],
+          "answer": 0
+      },
+      {
+          "id": 79,
+          "question": "Quyidagi kod natijasi qanday?\nprint(10 % 3)",
+          "options": ["1", "3", "0", "10"],
+          "answer": 0
+      },
+      {
+          "id": 80,
+          "question": "Quyidagi kod natijasi qanday?\nprint(type([]) is list)",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 0
+      },
+      {
+          "id": 81,
+          "question": "Quyidagi kod natijasi qanday?\nprint([] == False)",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 1
+      },
+      {
+          "id": 82,
+          "question": "Quyidagi kod natijasi qanday?\nprint({1,2,3} & {2,3,4})",
+          "options": ["{2, 3}", "{1, 2}", "{3, 4}", "{1, 4}"],
+          "answer": 0
+      },
+      {
+          "id": 83,
+          "question": "Quyidagi kod natijasi qanday?\nprint('A' < 'a')",
+          "options": ["True", "False", "Error", "None"],
+          "answer": 0
+      },
+      {
+          "id": 84,
+          "question": "Quyidagi kod natijasi qanday?\nprint(None == False)",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 1
+      },
+      {
+          "id": 85,
+          "question": "Quyidagi kod natijasi qanday?\nprint(0 == False)",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 86,
+          "question": "Quyidagi kod natijasi qanday?\nprint([] is [])",
+          "options": ["True", "False", "Error", "None"],
+          "answer": 1
+      },
+      {
+          "id": 87,
+          "question": "Quyidagi kod natijasi qanday?\nprint(' '.isspace())",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 88,
+          "question": "Quyidagi kod natijasi qanday?\nprint(''.isspace())",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 1
+      },
+      {
+          "id": 89,
+          "question": "Quyidagi kod natijasi qanday?\nprint(1 < 2 < 3)",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 0
+      },
+      {
+          "id": 90,
+          "question": "Quyidagi kod natijasi qanday?\nprint(3 > 2 > 1)",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 0
+      },
+      {
+          "id": 91,
+          "question": "Quyidagi kod natijasi qanday?\nprint('10' > '2')",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 0
+      },
+      {
+          "id": 92,
+          "question": "Quyidagi kod natijasi qanday?\nprint('' == 0)",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 1
+      },
+      {
+          "id": 93,
+          "question": "Quyidagi kod natijasi qanday?\nprint(0.1 + 0.2 == 0.3)",
+          "options": ["True", "False", "None", "Xato"],
+          "answer": 1
+      },
+      {
+          "id": 94,
+          "question": "Quyidagi kod natijasi qanday?\nprint('Python'[::-1])",
+          "options": ["nohtyP", "Python", "P", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 95,
+          "question": "Quyidagi kod natijasi qanday?\nprint({} == False)",
+          "options": ["True", "False", "Error", "None"],
+          "answer": 1
+      },
+      {
+          "id": 96,
+          "question": "Quyidagi kod natijasi qanday?\nprint(len(' ') == 1)",
+          "options": ["True", "False", "0", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 97,
+          "question": "Quyidagi kod natijasi qanday?\nprint(True + True + False)",
+          "options": ["2", "1", "0", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 98,
+          "question": "Quyidagi kod natijasi qanday?\nprint('Hello' > 'hello')",
+          "options": ["False", "True", "None", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 99,
+          "question": "Quyidagi kod natijasi qanday?\nprint((0, 1) < (0, 2))",
+          "options": ["True", "False", "None", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 100,
+          "question": "Quyidagi kod natijasi qanday?\nprint(all([True, False, True]))",
+          "options": ["False", "True", "None", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 101,
+          "question": "Quyidagi kod natijasi qanday?\nprint(any([]))",
+          "options": ["False", "True", "Error", "None"],
+          "answer": 0
+      },
+      {
+          "id": 102,
+          "question": "Quyidagi kod natijasi qanday?\nprint(len([[]]))",
+          "options": ["1", "0", "Error", "2"],
+          "answer": 0
+      },
+      {
+          "id": 103,
+          "question": "Quyidagi kod natijasi qanday?\nprint(sum([True, True, False]))",
+          "options": ["2", "1", "3", "0"],
+          "answer": 0
+      },
+      {
+          "id": 104,
+          "question": "Quyidagi kod natijasi qanday?\nprint('5' * 2)",
+          "options": ["55", "10", "Error", "25"],
+          "answer": 0
+      },
+      {
+          "id": 105,
+          "question": "Quyidagi kod natijasi qanday?\nprint([1, 2] + [3, 4])",
+          "options": ["[1, 2, 3, 4]", "[1, 2, [3, 4]]", "Error", "[4, 3, 2, 1]"],
+          "answer": 0
+      },
+      {
+          "id": 106,
+          "question": "Quyidagi kod natijasi qanday?\nprint({1: 'a', 2: 'b'}[1])",
+          "options": ["a", "1", "b", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 107,
+          "question": "Quyidagi kod natijasi qanday?\nprint(3 * 'ab')",
+          "options": ["ababab", "ab3", "Error", "None"],
+          "answer": 0
+      },
+      {
+          "id": 108,
+          "question": "Quyidagi kod natijasi qanday?\nprint(list('abc'))",
+          "options": ["['a', 'b', 'c']", "['abc']", "abc", "Error"],
+          "answer": 0
+      },
+      {
+          "id": 109,
+          "question": "Quyidagi kod natijasi qanday?\nprint(True is 1)",
+          "options": ["False", "True", "Error", "None"],
+          "answer": 1
+      },
+      {
+          "id": 110,
+          "question": "Quyidagi kod natijasi qanday?\nprint(None is None)",
+          "options": ["True", "False", "Error", "None"],
+          "answer": 0
+      }
+    
+  
   ],
 
 
