@@ -1,4 +1,11 @@
 /* Quiz Specific Styles */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+}
+
 .quiz-info {
   display: flex;
   align-items: center;

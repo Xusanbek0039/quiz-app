@@ -1,4 +1,11 @@
 /* Auth Specific Styles */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+}
+
 .auth-container {
   display: flex;
   flex-direction: column;
